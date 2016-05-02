@@ -29,9 +29,4 @@ public class Picture {
 
     @Column(name = "dislikes")
     private int dislikes;
-
-
-
-
-
 }

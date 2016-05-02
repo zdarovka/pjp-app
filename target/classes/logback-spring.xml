@@ -24,7 +24,7 @@
 
     <logger name="ppj" LEVEL="INFO"/>
 
-    <springProfile name="devel">\
-        <logger name="ppj" level="DEBUG"/>
+    <springProfile name="test">\
+        <logger name="ppj" level="ERROR"/>
     </springProfile>
 </configuration>

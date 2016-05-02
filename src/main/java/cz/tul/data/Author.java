@@ -38,6 +38,4 @@ public class Author {
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
-
-
 }
