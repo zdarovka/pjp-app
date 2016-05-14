@@ -29,6 +29,7 @@ public class Picture {
 
     @Column(name = "dislikes")
     private int dislikes;
+<<<<<<< HEAD
 
     public Picture() {
     }
@@ -88,4 +89,6 @@ public class Picture {
     public void setDislikes(int dislikes) {
         this.dislikes = dislikes;
     }
+=======
+>>>>>>> refs/remotes/zdarovka/master
 }

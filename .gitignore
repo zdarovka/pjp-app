@@ -13,4 +13,8 @@ hs_err_pid*
 
 .idea
 .idea/
+<<<<<<< HEAD
 .idea/workspace.xml
+=======
+*.iml
+>>>>>>> refs/remotes/zdarovka/master
