@@ -1,20 +1,23 @@
 package cz.tul.data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name="Comment")
 public class Comment {
     @Id
-    @Column(name="id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="commentId")
+    private int commentId;
 
-    @Column(name="author")
-    private String author;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "authorName")
+    private Author author;
 
     @Column(name="text")
     private String text;
@@ -31,7 +34,7 @@ public class Comment {
     @Column(name="datepdated")
     private Date dateUpdated;
 
-    public Comment(String author, String text)
+    public Comment(Author author, String text)
     {
         this.author = author;
         this.text = text;

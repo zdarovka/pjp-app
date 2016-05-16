@@ -1,9 +1,6 @@
 package cz.tul.data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -12,23 +9,23 @@ import java.util.Date;
 public class Author {
 
     @Id
-    @Column(name="name")
-    private String name;
+    @Column(name="authorName")
+    private String authorName;
 
     @Column(name="dateCreated")
     private Date dateCreated;
 
     public Author(String name, Date dateCreated) {
-        this.name = name;
+        this.authorName = name;
         this.dateCreated = dateCreated;
     }
 
     public String getName() {
-        return name;
+        return this.authorName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.authorName = name;
     }
 
     public Date getDateCreated() {

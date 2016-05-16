@@ -1,22 +1,29 @@
 package cz.tul.data;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="Picture")
 public class Picture {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="url")
     private String url;
 
     @Column(name="name")
     private String name;
 
-    @Column(name="author")
-    private String author;
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "authorName")
+    private Author author;
 
     @Column(name="dateCreated")
     private Date dateCreated;
@@ -30,7 +37,20 @@ public class Picture {
     @Column(name = "dislikes")
     private int dislikes;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JoinColumn(name = "tagId")
+    private List<Tag> Tags;
+
     public Picture() {
+    }
+
+    public List<cz.tul.data.Tag> getTags() {
+        return this.Tags;
+    }
+
+    public void setTag(List<cz.tul.data.Tag> tags) {
+        this.Tags = tags;
     }
 
     public String getUrl() {
@@ -49,11 +69,11 @@ public class Picture {
         this.name = name;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
