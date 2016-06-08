@@ -7,13 +7,16 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name="Picture")
+@Table(name="picture")
 public class Picture {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
+
     @Column(name="url")
     private String url;
 
@@ -22,7 +25,7 @@ public class Picture {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "authorName")
+    @JoinColumn(name = "author")
     private Author author;
 
     @Column(name="dateCreated")
@@ -39,7 +42,7 @@ public class Picture {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JoinColumn(name = "tagId")
+    @JoinColumn(name = "tag")
     private List<Tag> Tags;
 
     public Picture() {
@@ -49,8 +52,12 @@ public class Picture {
         return this.Tags;
     }
 
-    public void setTag(List<cz.tul.data.Tag> tags) {
+    public void setTags(List<Tag> tags) {
         this.Tags = tags;
+    }
+
+    public void addTag(Tag tag) {
+        this.Tags.add(tag);
     }
 
     public String getUrl() {

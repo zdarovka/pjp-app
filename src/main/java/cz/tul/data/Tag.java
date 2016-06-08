@@ -1,18 +1,18 @@
 package cz.tul.data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 /**
  * Created by zdars on 5/16/2016.
  */
 @Entity
-@Table(name="Tag")
+@Table(name="tag")
 public class Tag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="tagId")
-    private int tagId;
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
 
     @Column(name="name")
     private String name;
@@ -29,4 +29,9 @@ public class Tag {
     {
         this.name = name;
     }
+
+    public Tag(){
+
+    }
+
 }
