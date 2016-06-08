@@ -1,6 +1,5 @@
 package cz.tul;
 
-import cz.tul.app.DemoApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;

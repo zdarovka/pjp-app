@@ -5,33 +5,34 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
-@Table(name="Comment")
+@Table(name="comment")
 public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="commentId")
-    private int commentId;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Id
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "authorName")
+    @JoinColumn(name = "author")
     private Author author;
 
-    @Column(name="text")
+    @Column
     private String text;
 
-    @Column(name = "likes")
+    @Column
     private int likes;
 
-    @Column(name = "dislikes")
+    @Column
     private int dislikes;
 
-    @Column(name="dateCreated")
+    @Column
     private Date dateCreated;
 
-    @Column(name="datepdated")
+    @Column
     private Date dateUpdated;
 
     public Comment(Author author, String text)
@@ -44,5 +45,53 @@ public class Comment {
 
     public Date getDateCreated() {
         return dateCreated;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
 }
