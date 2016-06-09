@@ -21,13 +21,16 @@ public class Author {
     @Column
     private Date dateCreated;
 
-    public Author(String name, Date dateCreated) {
+    public Author(String name) {
         this.authorName = name;
-        this.dateCreated = dateCreated;
+        this.dateCreated = new Date();
+        this.id = UUID.randomUUID();
     }
 
     public Author(){
-
+        this.authorName = "Unnamed Author";
+        this.dateCreated = new Date();
+        this.id = UUID.randomUUID();
     }
 
     public String getName() {
