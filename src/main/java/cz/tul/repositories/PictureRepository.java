@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface PictureRepository extends CrudRepository<Picture, UUID> {
+public interface PictureRepository extends CrudRepository<Picture, UUID>, CustomPictureRepository {
     List<Picture> findAll();
 }
