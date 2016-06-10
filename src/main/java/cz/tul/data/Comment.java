@@ -51,6 +51,15 @@ public class Comment {
         this.dateUpdated = new Date();
     }
 
+    public Comment(UUID id,Author author, String text, Date date)
+    {
+        this.id = id;
+        this.author = author;
+        this.text = text;
+        this.dateCreated = date;
+        this.dateUpdated = date;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
