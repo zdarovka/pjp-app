@@ -1,5 +1,7 @@
 package cz.tul.data;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -8,10 +10,12 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="tag")
+@Document(collection = "tag")
 public class Tag {
 
     @Id
     @Column(columnDefinition = "BINARY(16)")
+    @org.springframework.data.annotation.Id
     private UUID id;
 
     @Column(name="name")
@@ -22,6 +26,11 @@ public class Tag {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Tag(UUID id, String name){
+        this.id = id;
         this.name = name;
     }
 
