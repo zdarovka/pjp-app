@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
@@ -66,8 +67,10 @@ public class PicturesController extends BaseController{
         return mav;
     }
 
+    @ResponseBody
     @RequestMapping("/pictures/{id}/like")
-    public String like(@PathVariable("id") UUID id) {
+    public int like(@PathVariable("id") UUID id) {
+
         Picture picture = super.Pictures.findOne(id);
 
         if(picture == null)
@@ -79,11 +82,12 @@ public class PicturesController extends BaseController{
 
         super.Logger.info(String.format("Like picture (%s)", id));
 
-        return "pictures";
+        return picture.getLikes();
     }
 
+    @ResponseBody
     @RequestMapping("/pictures/{id}/dislike")
-    public String dislike(@PathVariable("id") UUID id) {
+    public int dislike(@PathVariable("id") UUID id) {
 
         Picture picture = super.Pictures.findOne(id);
 
@@ -96,6 +100,6 @@ public class PicturesController extends BaseController{
 
         super.Logger.info(String.format("Dislike picture (%s)", id));
 
-        return "pictures";
+        return picture.getDislikes();
     }
 }
