@@ -31,6 +31,12 @@ public class Author {
         this.id = id;
     }
 
+    public Author(UUID id, String name, Date date){
+        this.name = name;
+        this.dateCreated = date;
+        this.id = id;
+    }
+
     public Author(String name) {
         this.name = name;
         this.dateCreated = new Date();
