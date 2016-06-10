@@ -48,6 +48,14 @@ public class Picture {
     public Picture() {
     }
 
+    public Picture(UUID id,String name, String url){
+        this.name = name;
+        this.url = url;
+        this.id = id;
+        this.dateCreated = new Date();
+        this.dateUpdated = new Date();
+    }
+
     public Picture(Author author) {
         this.author = author;
         this.id = UUID.randomUUID();
