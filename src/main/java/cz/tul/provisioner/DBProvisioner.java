@@ -112,7 +112,7 @@ public class DBProvisioner implements InitializingBean {
 
     private boolean provisionTagsForPicture() throws IOException {
 
-        int max = tagRepository.findAll().size();
+        int max = (int)tagRepository.count();
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
             int lowI = DataHelper.randomNumber(0,max);
@@ -125,10 +125,10 @@ public class DBProvisioner implements InitializingBean {
 
     private boolean provisionAuthorForPicture() throws IOException {
 
-        int max = authorRepository.findAll().size();
+        int max = (int)authorRepository.count();
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
-            p.setAuthor(authorRepository.findAll().get(DataHelper.randomNumber(0,max)));
+            p.setAuthor(authorRepository.random());
             pictureRepository.save(p);
         }
 

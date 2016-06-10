@@ -1,3 +1,3 @@
-21:15:10.827 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 19772 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
-21:15:10.832 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-21:15:17.207 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 6.999 seconds (JVM running for 7.403)
+21:45:23.406 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 6044 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
+21:45:23.414 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+21:45:30.094 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 7.177 seconds (JVM running for 7.537)
