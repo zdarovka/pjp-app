@@ -25,11 +25,6 @@ public class Tag {
         this.name = name;
     }
 
-    public Tag(UUID id, String name){
-        this.id = id;
-        this.name = name;
-    }
-
     public Tag(String name)
     {
         this.name = name;

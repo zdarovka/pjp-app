@@ -16,35 +16,29 @@ public class Author {
     private UUID id;
 
     @Column
-    private String name;
+    private String authorName;
 
     @Column
     private Date dateCreated;
 
-    public Author(UUID id, String name){
-        this.name = name;
-        this.dateCreated = new Date();
-        this.id = id;
-    }
-
     public Author(String name) {
-        this.name = name;
+        this.authorName = name;
         this.dateCreated = new Date();
         this.id = UUID.randomUUID();
     }
 
     public Author(){
-        this.name = "Unnamed Author";
+        this.authorName = "Unnamed Author";
         this.dateCreated = new Date();
         this.id = UUID.randomUUID();
     }
 
     public String getName() {
-        return this.name;
+        return this.authorName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.authorName = name;
     }
 
     public Date getDateCreated() {
@@ -56,11 +50,11 @@ public class Author {
     }
 
     public String getAuthorName() {
-        return name;
+        return authorName;
     }
 
     public void setAuthorName(String authorName) {
-        this.name = authorName;
+        this.authorName = authorName;
     }
 
     public UUID getId() {

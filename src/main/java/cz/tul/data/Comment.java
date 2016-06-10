@@ -35,13 +35,8 @@ public class Comment {
     @Column
     private Date dateUpdated;
 
-    public Comment(){
-
-    }
-
-    public Comment(UUID id,Author author, String text)
+    public Comment(Author author, String text)
     {
-        this.id = id;
         this.author = author;
         this.text = text;
         this.dateCreated = new Date();
