@@ -10,5 +10,4 @@ import java.util.UUID;
 @Repository
 public interface TagRepository extends CrudRepository<Tag, UUID> {
     List<Tag> findAll();
-
 }
