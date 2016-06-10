@@ -1,3 +1,12 @@
-22:05:11.410 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 28696 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
-22:05:11.414 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-22:05:16.795 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 5.9 seconds (JVM running for 6.484)
+12:14:07.185 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 7196 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
+12:14:07.190 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+12:14:12.823 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 6.169 seconds (JVM running for 6.651)
+12:14:26.065 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Fetched first picture: 4ccf8376-b8d6-4e58-b311-97e173a605aa)
+12:14:26.065 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Redirect to picture (4ccf8376-b8d6-4e58-b311-97e173a605aa)
+12:14:26.084 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Fetched first picture: 4ccf8376-b8d6-4e58-b311-97e173a605aa)
+12:14:26.084 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Redirect to picture (4ccf8376-b8d6-4e58-b311-97e173a605aa)
+12:14:26.115 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - Fetched previous picture: d9f831ff-d13e-4970-872e-05666fcf5811)
+12:14:26.119 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - Fetched previous picture: 0647ea8e-9823-4fe9-be74-209eef68cd03)
+12:14:26.119 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - prev picture (d9f831ff-d13e-4970-872e-05666fcf5811)
+12:14:26.119 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - next picture (0647ea8e-9823-4fe9-be74-209eef68cd03)
+12:14:26.119 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - Showing picture (0647ea8e-9823-4fe9-be74-209eef68cd03)

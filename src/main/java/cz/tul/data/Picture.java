@@ -17,10 +17,10 @@ public class Picture {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
-    @Column(name="url")
+    @Column
     private String url;
 
-    @Column(name="name")
+    @Column
     private String name;
 
     @ManyToOne
@@ -28,16 +28,16 @@ public class Picture {
     @JoinColumn(name = "author")
     private Author author;
 
-    @Column(name="dateCreated")
+    @Column
     private Date dateCreated;
 
-    @Column(name="datepdated")
+    @Column
     private Date dateUpdated;
 
-    @Column(name = "likes")
+    @Column
     private int likes;
 
-    @Column(name = "dislikes")
+    @Column
     private int dislikes;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -46,6 +46,14 @@ public class Picture {
     private List<Tag> Tags;
 
     public Picture() {
+    }
+
+    public Picture(Author author) {
+        this.author = author;
+        this.id = UUID.randomUUID();
+        this.dateCreated = new Date();
+        this.dateUpdated = new Date();
+        this.name = "Unnamed picture";
     }
 
     public List<cz.tul.data.Tag> getTags() {
@@ -116,4 +124,15 @@ public class Picture {
         this.dislikes = dislikes;
     }
 
+    public void incrementLike(){
+        this.likes++;
+    }
+
+    public void incrementDislikes(){
+        this.dislikes++;
+    }
+
+    public UUID getId() {
+        return id;
+    }
 }
