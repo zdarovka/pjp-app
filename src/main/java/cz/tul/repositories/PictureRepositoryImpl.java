@@ -21,7 +21,6 @@ public class PictureRepositoryImpl implements CustomPictureRepository {
     public Picture first() {
 
         List<Picture> pictures = em.createQuery("select p from Picture p order by p.dateCreated asc", Picture.class)
-                .setFirstResult(0)
                 .setMaxResults(1)
                 .getResultList();
 
@@ -38,9 +37,9 @@ public class PictureRepositoryImpl implements CustomPictureRepository {
     @Override
     public Picture previous(Date date) {
         TypedQuery<Picture> q = em.createQuery("select p from Picture p where p.dateCreated < :date order by p.dateCreated desc", Picture.class);
-        q.setParameter("date", date, TemporalType.DATE);
+        q.setParameter("date", date, TemporalType.TIMESTAMP);
 
-        List<Picture> pictures = q.setFirstResult(0)
+        List<Picture> pictures = q
                 .setMaxResults(1)
                 .getResultList();
 
@@ -58,8 +57,8 @@ public class PictureRepositoryImpl implements CustomPictureRepository {
     @Override
     public Picture next(Date date) {
         TypedQuery<Picture> q = em.createQuery("select p from Picture p where p.dateCreated > :date order by p.dateCreated asc", Picture.class);
-        q.setParameter("date",date, TemporalType.DATE);
-        List<Picture>  pictures = q.setFirstResult(0)
+        q.setParameter("date", date, TemporalType.TIMESTAMP);
+        List<Picture>  pictures = q
                 .setMaxResults(1)
                 .getResultList();
 
