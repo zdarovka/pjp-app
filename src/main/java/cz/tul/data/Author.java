@@ -1,5 +1,7 @@
 package cz.tul.data;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,36 +11,44 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "author")
+@Document(collection = "author")
 public class Author {
 
     @Id
+    @org.springframework.data.annotation.Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @Column
-    private String authorName;
+    private String name;
 
     @Column
     private Date dateCreated;
 
+    public Author(UUID id, String name){
+        this.name = name;
+        this.dateCreated = new Date();
+        this.id = id;
+    }
+
     public Author(String name) {
-        this.authorName = name;
+        this.name = name;
         this.dateCreated = new Date();
         this.id = UUID.randomUUID();
     }
 
     public Author(){
-        this.authorName = "Unnamed Author";
+        this.name = "Unnamed Author";
         this.dateCreated = new Date();
         this.id = UUID.randomUUID();
     }
 
     public String getName() {
-        return this.authorName;
+        return this.name;
     }
 
     public void setName(String name) {
-        this.authorName = name;
+        this.name = name;
     }
 
     public Date getDateCreated() {
@@ -50,11 +60,11 @@ public class Author {
     }
 
     public String getAuthorName() {
-        return authorName;
+        return name;
     }
 
     public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+        this.name = authorName;
     }
 
     public UUID getId() {
