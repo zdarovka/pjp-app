@@ -22,7 +22,7 @@
     <![endif]-->
 </head>
 <body>
-<div class="site-wrapper" style="background-image: url('http://www.wallpapereast.com/static/images/spring-in-nature-wide-wallpaper-603794.jpg')">
+<div class="site-wrapper" th:style="|background-image: url('${picture.url}'); background-size: cover;|">
 
     <div class="site-wrapper-inner">
 
@@ -31,22 +31,21 @@
             <div class="inner cover">
                 <div class="row">
                     <div class="col-sm-3">
-                        <a href="#" class="btn btn-default" role="button" style="margin: auto auto;">Prev</a>
+                        <a th:href="${prev != null} ? @{${prev.id}} : '#'" class="btn btn-default" role="button">Previous</a>
 
                     </div>
                     <div class="col-sm-6">
                         <h1 class="cover-heading">
-                            <a href="#" class="btn btn-danger" role="button">Dislike 99</a>
-                            Image name
-                            <a href="#" class="btn btn-success" role="button">Like 55</a>
+                            <a href="#" class="btn btn-danger" role="button">Dislike <span th:text="${picture.dislikes}"></span></a>
+                            <span th:text="${picture.name}"></span>
+                            <a href="#" class="btn btn-success" role="button">Like <span th:text="${picture.likes}"></span></a>
                         </h1>
                         <p class="lead">AUTHOR | 25.5.2016 | (tag1, tag2, tag3)</p>
 
-                        <textarea rows="4">
-                        </textarea>
+                        <textarea rows="4"></textarea>
                     </div>
                     <div class="col-sm-3">
-                        <a href="#" class="btn btn-default" role="button">Next</a>
+                        <a th:href="${next != null} ? @{${next.id}} : '#'" class="btn btn-default" role="button">Next</a>
                     </div>
                 </div>
             </div>

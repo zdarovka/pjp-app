@@ -94,4 +94,12 @@ public class Comment {
     public void setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
+
+    public void incrementLike(){
+        this.likes++;
+    }
+
+    public void incrementDislikes(){
+        this.dislikes++;
+    }
 }

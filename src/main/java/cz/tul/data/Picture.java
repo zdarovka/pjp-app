@@ -53,6 +53,7 @@ public class Picture {
         this.id = UUID.randomUUID();
         this.dateCreated = new Date();
         this.dateUpdated = new Date();
+        this.name = "Unnamed picture";
     }
 
     public List<cz.tul.data.Tag> getTags() {

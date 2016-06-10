@@ -1,7 +1,7 @@
 package cz.tul.controller;
 
 import cz.tul.DemoApplication;
-import cz.tul.repositories.PictureRepository;
+import cz.tul.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +16,7 @@ public abstract class BaseController {
 
     @Autowired
     PictureRepository Pictures;
+
+    @Autowired
+    CommentRepository Comments;
 }
