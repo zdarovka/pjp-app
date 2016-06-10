@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, UUID> {
     List<Author> findAll();
+    List<Author> findByName(String name);
 }

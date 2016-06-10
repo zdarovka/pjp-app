@@ -3,6 +3,7 @@ package cz.tul.data;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,9 +12,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name="picture")
+@Document(collection = "picture")
 public class Picture {
 
     @Id
+    @org.springframework.data.annotation.Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
@@ -46,6 +49,12 @@ public class Picture {
     private List<Tag> Tags;
 
     public Picture() {
+    }
+
+    public Picture(UUID id, String name,String url){
+        this.id = id;
+        this.name=name;
+        this.url = url;
     }
 
     public List<cz.tul.data.Tag> getTags() {
