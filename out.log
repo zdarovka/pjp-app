@@ -1,3 +1,0 @@
-21:11:51.275 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on PetrB-PC with PID 3828 (started by Petr in C:\Users\Petr\Documents\TUL\PPJ PROJEKT MINE\pjp-app)
-21:11:51.280 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-21:12:01.165 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 10.692 seconds (JVM running for 11.524)

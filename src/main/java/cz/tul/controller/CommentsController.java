@@ -5,6 +5,7 @@ import cz.tul.data.Comment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.UUID;
 
@@ -14,8 +15,9 @@ import java.util.UUID;
 @Controller
 public class CommentsController extends BaseController{
 
+    @ResponseBody
     @RequestMapping("/comments/{id}/like")
-    public String like(@PathVariable("id") UUID id) {
+    public int like(@PathVariable("id") UUID id) {
         Comment comment = super.Comments.findOne(id);
 
         if(comment == null)
@@ -27,11 +29,12 @@ public class CommentsController extends BaseController{
 
         super.Logger.info(String.format("Like comment (%s)", id));
 
-        return "pictures";
+        return comment.getDislikes();
     }
 
+    @ResponseBody
     @RequestMapping("/comments/{id}/dislike")
-    public String dislike(@PathVariable("id") UUID id) {
+    public int dislike(@PathVariable("id") UUID id) {
 
         Comment comment = super.Comments.findOne(id);
 
@@ -44,6 +47,6 @@ public class CommentsController extends BaseController{
 
         super.Logger.info(String.format("Dislike comment (%s)", id));
 
-        return "pictures";
+        return comment.getDislikes();
     }
 }
