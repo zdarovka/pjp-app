@@ -3,6 +3,7 @@ package cz.tul.data;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -51,12 +52,12 @@ public class Picture {
     public Picture() {
     }
 
-    public Picture(UUID id,String name, String url){
+    public Picture(UUID id,String name, String url, Date d){
         this.name = name;
         this.url = url;
         this.id = id;
-        this.dateCreated = new Date();
-        this.dateUpdated = new Date();
+        this.dateCreated = d;
+        this.dateUpdated = d;
     }
 
     public Picture(Author author) {

@@ -20,19 +20,19 @@ public class PictureRepositoryImpl implements CustomPictureRepository {
     @Override
     public Picture first() {
 
-        Picture picture = em.createQuery("select p from Picture p order by p.dateCreated asc", Picture.class)
+        List<Picture> pictures = em.createQuery("select p from Picture p order by p.dateCreated asc", Picture.class)
                 .setFirstResult(0)
                 .setMaxResults(1)
-                .getSingleResult();
+                .getResultList();
 
-        if(picture == null)
+        if(pictures.isEmpty())
         {
             return null;
         }
 
-        LoggerFactory.getLogger(DemoApplication.class).info("Fetched first picture: " + picture.getId() + ")");
+        LoggerFactory.getLogger(DemoApplication.class).info("Fetched first picture: " + pictures.get(0).getId() + ")");
 
-        return picture;
+        return pictures.get(0);
     }
 
     @Override
@@ -40,37 +40,37 @@ public class PictureRepositoryImpl implements CustomPictureRepository {
         TypedQuery<Picture> q = em.createQuery("select p from Picture p where p.dateCreated < :date order by p.dateCreated desc", Picture.class);
         q.setParameter("date", date, TemporalType.DATE);
 
-        Picture picture = q.setFirstResult(0)
+        List<Picture> pictures = q.setFirstResult(0)
                 .setMaxResults(1)
-                .getSingleResult();
+                .getResultList();
 
 
-        if(picture == null)
+        if(pictures.isEmpty())
         {
             return null;
         }
 
-        LoggerFactory.getLogger(DemoApplication.class).info("Fetched previous picture: " + picture.getId() + ")");
+        LoggerFactory.getLogger(DemoApplication.class).info("Fetched previous picture: " + pictures.get(0).getId() + ")");
 
-        return picture;
+        return pictures.get(0);
     }
 
     @Override
     public Picture next(Date date) {
         TypedQuery<Picture> q = em.createQuery("select p from Picture p where p.dateCreated > :date order by p.dateCreated asc", Picture.class);
         q.setParameter("date",date, TemporalType.DATE);
-        Picture picture = q.setFirstResult(0)
+        List<Picture>  pictures = q.setFirstResult(0)
                 .setMaxResults(1)
-                .getSingleResult();
+                .getResultList();
 
 
-        if(picture == null)
+        if(pictures.isEmpty())
         {
             return null;
         }
 
-        LoggerFactory.getLogger(DemoApplication.class).info("Fetched previous picture: " + picture.getId() + ")");
+        LoggerFactory.getLogger(DemoApplication.class).info("Fetched previous picture: " + pictures.get(0).getId() + ")");
 
-        return picture;
+        return pictures.get(0);
     }
 }

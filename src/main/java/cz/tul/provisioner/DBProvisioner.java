@@ -1,6 +1,7 @@
 package cz.tul.provisioner;
 
 
+import cz.tul.code.DataHelper;
 import cz.tul.data.Author;
 import cz.tul.data.Comment;
 import cz.tul.data.Tag;
@@ -53,6 +54,8 @@ public class DBProvisioner implements InitializingBean {
         provisionPictureCollectionIfEmpty();
         provisionTagCollectionIfEmpty();
         provisionCommentCollectionIfEmpty();
+        provisionTagsForPicture();
+        provisionAuthorForPicture();
     }
 
     private boolean provisionAutorCollectionIfEmpty() throws IOException {
@@ -74,7 +77,7 @@ public class DBProvisioner implements InitializingBean {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/pictures.txt")))) {
                 List<Picture> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Picture(UUID.fromString(a[0]), a[1], a[2])).collect(Collectors.toList());
+                        .map(a -> new Picture(UUID.fromString(a[0]), a[1], a[2], DataHelper.randomDate())).collect(Collectors.toList());
                 pictureRepository.save(els);
             }
         }
@@ -87,7 +90,7 @@ public class DBProvisioner implements InitializingBean {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/picturetags.txt")))) {
                 List<Tag> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Tag(UUID.fromString(a[0]), a[1])).collect(Collectors.toList());
+                        .map(a -> new Tag(UUID.fromString(a[0]), a[2])).collect(Collectors.toList());
                 tagRepository.save(els);
             }
         }
@@ -105,5 +108,27 @@ public class DBProvisioner implements InitializingBean {
             }
         }
         return isEmpty;
+    }
+
+    private boolean provisionTagsForPicture() throws IOException {
+
+        Iterable<Picture> pictures = pictureRepository.findAll();
+        for (Picture p : pictures) {
+            p.setTags(tagRepository.findAll());
+            pictureRepository.save(p);
+        }
+
+        return true;
+    }
+
+    private boolean provisionAuthorForPicture() throws IOException {
+
+        Iterable<Picture> pictures = pictureRepository.findAll();
+        for (Picture p : pictures) {
+            p.setAuthor(authorRepository.findAll().get(0));
+            pictureRepository.save(p);
+        }
+
+        return true;
     }
 }

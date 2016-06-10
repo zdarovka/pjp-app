@@ -40,7 +40,10 @@
                             <span th:text="${picture.name}"></span>
                             <a href="#" class="btn btn-success" role="button">Like <span th:text="${picture.likes}"></span></a>
                         </h1>
-                        <p class="lead">AUTHOR | 25.5.2016 | (tag1, tag2, tag3)</p>
+                        <p class="lead"><span th:text="${picture.author.name}"></span> |
+                            <span th:text="${#dates.format(picture.dateCreated, 'dd.MM.YYYY HH:mm')}"></span> |
+                            <span th:each="tag : ${picture.tags}" th:text="${tag.name}"></span>
+                        </p>
 
                         <textarea rows="4"></textarea>
                     </div>
