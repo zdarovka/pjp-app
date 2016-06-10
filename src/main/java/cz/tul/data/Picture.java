@@ -60,6 +60,16 @@ public class Picture {
         this.dateUpdated = d;
     }
 
+    public Picture(UUID id,String name, String url, Date d, int likes, int dislikes){
+        this.name = name;
+        this.url = url;
+        this.id = id;
+        this.dateCreated = d;
+        this.dateUpdated = d;
+        this.likes = likes;
+        this.dislikes = dislikes;
+    }
+
     public Picture(Author author) {
         this.author = author;
         this.id = UUID.randomUUID();
