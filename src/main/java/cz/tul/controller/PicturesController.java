@@ -27,29 +27,10 @@ public class PicturesController extends BaseController{
 
     @RequestMapping({"/", "/pictures",  "/index"})
     public String index() {
-
-        Author a = new Author("john doe");
-
-        authors.save(a);
-
-        Picture p = new Picture(a);
-        p.setDateCreated(DataHelper.randomDate());
-        p.setUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-EjO7WIBpny2Q9beiqP45EfiOGLXYxTDLtaDWhf4LQ43Y36Xtv0iMEkN4");
-        Picture p1 = new Picture(a);
-        p1.setDateCreated(DataHelper.randomDate());
-        p1.setUrl("http://az616578.vo.msecnd.net/files/2016/05/08/635982646968672800-1766933105_fresh_nature-1280x720.jpg");
-        Picture p2 = new Picture(a);
-        p2.setDateCreated(DataHelper.randomDate());
-        p2.setUrl("http://az616578.vo.msecnd.net/files/2016/04/23/6359702716756729221307410466_Free-Wallpaper-Nature-Scenes.jpg");
-
-        super.Pictures.save(p);
-        super.Pictures.save(p1);
-        super.Pictures.save(p2);
-
         Picture picture = super.Pictures.first();
         super.Logger.info(String.format("Redirect to picture (%s)", picture.getId()));
 
-        return "redirect:/" + p1.getId();
+        return "redirect:/" + picture.getId();
     }
 
     @RequestMapping({"/{id}",  "/pictures/{id}", "/index/{id}"})
@@ -60,10 +41,6 @@ public class PicturesController extends BaseController{
         Picture prev = super.Pictures.previous(picture.getDateCreated());
         Picture next = super.Pictures.next(picture.getDateCreated());
 
-        super.Logger.info(String.format("prev picture (%s)", prev.getId()));
-
-        super.Logger.info(String.format("next picture (%s)", next.getId()));
-
         if(picture == null)
         {
             throw new ResourceNotFoundException();
@@ -73,8 +50,16 @@ public class PicturesController extends BaseController{
 
         ModelAndView mav = new ModelAndView("pictures");
         mav.addObject("picture", picture );
-        mav.addObject("prev", prev);
-        mav.addObject("next", next);
+        if(prev != null)
+        {
+            super.Logger.info(String.format("prev picture (%s)", prev.getId()));
+            mav.addObject("prev", prev);
+        }
+        if(next != null)
+        {
+            super.Logger.info(String.format("next picture (%s)", next.getId()));
+            mav.addObject("next", next);
+        }
 
         //todo: comments
 

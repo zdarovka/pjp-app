@@ -1,6 +1,7 @@
 package cz.tul.provisioner;
 
 
+import cz.tul.code.DataHelper;
 import cz.tul.data.Author;
 import cz.tul.data.Comment;
 import cz.tul.data.Tag;
@@ -74,7 +75,7 @@ public class DBProvisioner implements InitializingBean {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/pictures.txt")))) {
                 List<Picture> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Picture(UUID.fromString(a[0]), a[1], a[2])).collect(Collectors.toList());
+                        .map(a -> new Picture(UUID.fromString(a[0]), a[1], a[2], DataHelper.randomDate())).collect(Collectors.toList());
                 pictureRepository.save(els);
             }
         }
