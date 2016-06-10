@@ -61,7 +61,7 @@ public class DBProvisioner implements InitializingBean {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/Autor.txt")))) {
                 List<Author> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Author(a[1])).collect(Collectors.toList());
+                        .map(a -> new Author(UUID.fromString(a[0]), a[1])).collect(Collectors.toList());
                 authorRepository.save(els);
             }
         }

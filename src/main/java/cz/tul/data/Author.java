@@ -1,5 +1,7 @@
 package cz.tul.data;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,9 +11,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "author")
+@Document(collection = "author")
 public class Author {
 
     @Id
+    @org.springframework.data.annotation.Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 

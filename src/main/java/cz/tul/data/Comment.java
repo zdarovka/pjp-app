@@ -2,6 +2,7 @@ package cz.tul.data;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,9 +10,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name="comment")
+@Document(collection = "comments")
 public class Comment {
 
     @Id
+    @org.springframework.data.annotation.Id
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
