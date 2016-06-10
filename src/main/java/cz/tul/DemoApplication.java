@@ -1,13 +1,14 @@
 package cz.tul;
 
 import cz.tul.configuration.JpaConfig;
+import cz.tul.configuration.MongoConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@Import({JpaConfig.class})
+@Import({JpaConfig.class, MongoConfig.class})
 public class DemoApplication extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
