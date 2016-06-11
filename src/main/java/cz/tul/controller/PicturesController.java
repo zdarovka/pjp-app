@@ -3,6 +3,7 @@ package cz.tul.controller;
 import cz.tul.code.DataHelper;
 import cz.tul.code.ResourceNotFoundException;
 import cz.tul.data.Author;
+import cz.tul.data.Comment;
 import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -62,7 +64,9 @@ public class PicturesController extends BaseController{
             mav.addObject("next", next);
         }
 
-        //todo: comments
+        List<Comment> sorted = picture.getComments();
+        sorted.sort((p1, p2) -> p1.getDateCreated().compareTo(p2.getDateCreated()));
+        picture.setComments(sorted);
 
         return mav;
     }

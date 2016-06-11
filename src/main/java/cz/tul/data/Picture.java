@@ -46,8 +46,13 @@ public class Picture {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JoinColumn(name = "comment")
+    private List<Comment> comments;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "tag")
-    private List<Tag> Tags;
+    private List<Tag> tags;
 
     public Picture() {
     }
@@ -78,16 +83,29 @@ public class Picture {
         this.name = "Unnamed picture";
     }
 
+    public List<Comment> getComments(){
+        return this.comments;
+    }
+
+    public void setComments(List<Comment> comments){
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment)
+    {
+        this.comments.add(comment);
+    }
+
     public List<cz.tul.data.Tag> getTags() {
-        return this.Tags;
+        return this.tags;
     }
 
     public void setTags(List<Tag> tags) {
-        this.Tags = tags;
+        this.tags = tags;
     }
 
     public void addTag(Tag tag) {
-        this.Tags.add(tag);
+        this.tags.add(tag);
     }
 
     public String getUrl() {

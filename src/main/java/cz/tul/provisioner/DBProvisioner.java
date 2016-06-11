@@ -56,6 +56,7 @@ public class DBProvisioner implements InitializingBean {
         provisionCommentCollectionIfEmpty();
         provisionTagsForPicture();
         provisionAuthorForPicture();
+        provisionCommentsForPicture();
     }
 
     private boolean provisionAuthorCollectionIfEmpty() throws IOException {
@@ -117,6 +118,19 @@ public class DBProvisioner implements InitializingBean {
         for (Picture p : pictures) {
             int lowI = DataHelper.randomNumber(0,max);
             p.setTags(tagRepository.findAll().subList(lowI,DataHelper.randomNumber(lowI,max)));
+            pictureRepository.save(p);
+        }
+
+        return true;
+    }
+
+    private boolean provisionCommentsForPicture() throws IOException {
+
+        int max = (int)commentRepository.count();
+        Iterable<Picture> pictures = pictureRepository.findAll();
+        for (Picture p : pictures) {
+            int lowI = DataHelper.randomNumber(0,max);
+            p.setComments(commentRepository.findAll().subList(lowI,DataHelper.randomNumber(lowI,max)));
             pictureRepository.save(p);
         }
 

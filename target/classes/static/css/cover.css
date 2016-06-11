@@ -9,6 +9,14 @@ a:hover {
   color: #fff;
 }
 
+table{
+width: 100%;
+text-align: center;
+}
+th{
+text-align: center !important;
+}
+
 textarea{
 
     width: 100%;

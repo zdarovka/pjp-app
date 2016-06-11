@@ -29,7 +29,7 @@ public class CommentsController extends BaseController{
 
         super.Logger.info(String.format("Like comment (%s)", id));
 
-        return comment.getDislikes();
+        return comment.getLikes();
     }
 
     @ResponseBody
