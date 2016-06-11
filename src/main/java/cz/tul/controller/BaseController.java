@@ -13,10 +13,4 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class BaseController {
 
     protected Logger Logger = LoggerFactory.getLogger(DemoApplication.class);
-
-    @Autowired
-    PictureRepository Pictures;
-
-    @Autowired
-    CommentRepository Comments;
 }
