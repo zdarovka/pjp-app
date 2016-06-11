@@ -56,6 +56,7 @@ public class DBProvisioner implements InitializingBean {
         provisionCommentCollectionIfEmpty();
         provisionTagsForPicture();
         provisionAuthorForPicture();
+        provisionCommentsForPicture();
     }
 
     private boolean provisionAuthorCollectionIfEmpty() throws IOException {
@@ -112,7 +113,7 @@ public class DBProvisioner implements InitializingBean {
 
     private boolean provisionTagsForPicture() throws IOException {
 
-        int max = tagRepository.findAll().size();
+        int max = (int)tagRepository.count();
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
             int lowI = DataHelper.randomNumber(0,max);
@@ -123,12 +124,25 @@ public class DBProvisioner implements InitializingBean {
         return true;
     }
 
-    private boolean provisionAuthorForPicture() throws IOException {
+    private boolean provisionCommentsForPicture() throws IOException {
 
-        int max = authorRepository.findAll().size();
+        int max = (int)commentRepository.count();
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
-            p.setAuthor(authorRepository.findAll().get(DataHelper.randomNumber(0,max)));
+            int lowI = DataHelper.randomNumber(0,max);
+            p.setComments(commentRepository.findAll().subList(lowI,DataHelper.randomNumber(lowI,max)));
+            pictureRepository.save(p);
+        }
+
+        return true;
+    }
+
+    private boolean provisionAuthorForPicture() throws IOException {
+
+        int max = (int)authorRepository.count();
+        Iterable<Picture> pictures = pictureRepository.findAll();
+        for (Picture p : pictures) {
+            p.setAuthor(authorRepository.random());
             pictureRepository.save(p);
         }
 

@@ -40,23 +40,38 @@
                             <span th:text="${picture.name}"></span>
                             <a th:href="${picture.id}" class="btn btn-success" id="pic-like" role="button">Like <span th:text="${picture.likes}"></span></a>
                         </h1>
-                        <p class="lead"><span th:text="${picture.author.name}"></span> |
+                        <p class="lead">
+                            <span th:text="${picture.author.name}"></span> |
                             <span th:text="${#dates.format(picture.dateCreated, 'dd.MM.YYYY HH:mm')}"></span> |
                             <span th:each="tag : ${picture.tags}" th:text="${tag.name}"></span>
                         </p>
 
-                        <textarea rows="4"></textarea>
+                        <table>
+                            <tr>
+                                <th>Created</th>
+                                <th>Author</th>
+                                <th>Comment</th>
+                                <th>Likes/Dislikes</th>
+                            </tr>
+                            <tr th:each="comment : ${picture.comments}">
+                                <td th:text="${#dates.format(comment.dateCreated, 'dd.MM.YYYY HH:mm')}"></td>
+                                <td th:text="${comment.author.name}"></td>
+                                <td th:text="${comment.text}"></td>
+
+                                <td>
+                                    <a th:href="${comment.id}" class="btn btn-danger comment-dislike" role="button">Dislike <span th:text="${comment.dislikes}"></span></a>
+                                    <a th:href="${comment.id}" class="btn btn-success comment-like" role="button">Like <span th:text="${comment.likes}"></span></a>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="col-sm-3">
                         <a th:href="${next != null} ? @{${next.id}} : '#'" class="btn btn-default" role="button">Next</a>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -65,24 +80,34 @@
 
 <script type="text/javascript">
     $(document).on("click", "#pic-like", function(e){
-        var $that = $(this);
-        var id = $that.attr("href");
-        $.get("/pictures/" + id + "/like", function (data) {
-            $("span", $that).html(data);
-        });
-        e.preventDefault();
-        return false;
+        var id = $(this).attr("href");
+        return req("/pictures/" + id + "/like", $(this), e);
     });
 
      $(document).on("click", "#pic-dislike", function(e){
-        var $that = $(this);
-        var id = $that.attr("href");
-        $.get("/pictures/" + id + "/dislike", function (data) {
+        var id = $(this).attr("href");
+        return req("/pictures/" + id + "/dislike", $(this), e);
+    });
+
+    $(document).on("click", ".comment-like", function(e){
+        var id = $(this).attr("href");
+        return req("/comments/" + id + "/like", $(this), e);
+    });
+
+    $(document).on("click", ".comment-dislike", function(e){
+        var id = $(this).attr("href");
+        return req("/comments/" + id + "/dislike", $(this), e);
+    });
+
+    var req = function(url, $context, e){
+        var $that = $($context);
+        $.get(url, function (data) {
             $("span", $that).html(data);
         });
         e.preventDefault();
         return false;
-    });
+    }
+    
 </script>
 
 </body>
