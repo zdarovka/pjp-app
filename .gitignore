@@ -14,10 +14,8 @@ hs_err_pid*
 .idea
 .idea/
 .idea/workspace.xml
-=======
+
 *.iml
 
-=======
-*.iml
+*.log
 
-out.log
