@@ -2,6 +2,8 @@ package cz.tul.controller;
 
 import cz.tul.code.ResourceNotFoundException;
 import cz.tul.data.Comment;
+import cz.tul.repositories.CommentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,17 +17,21 @@ import java.util.UUID;
 @Controller
 public class CommentsController extends BaseController{
 
+    @Autowired
+    private CommentRepository Comments;
+
+
     @ResponseBody
     @RequestMapping("/comments/{id}/like")
     public int like(@PathVariable("id") UUID id) {
-        Comment comment = super.Comments.findOne(id);
+        Comment comment = this.Comments.findOne(id);
 
         if(comment == null)
         {
             throw new ResourceNotFoundException();
         }
         comment.incrementLike();
-        super.Comments.save(comment);
+        this.Comments.save(comment);
 
         super.Logger.info(String.format("Like comment (%s)", id));
 
@@ -37,14 +43,14 @@ public class CommentsController extends BaseController{
     @RequestMapping("/comments/{id}/dislike")
     public int dislike(@PathVariable("id") UUID id) {
 
-        Comment comment = super.Comments.findOne(id);
+        Comment comment = this.Comments.findOne(id);
 
         if(comment == null)
         {
             throw new ResourceNotFoundException();
         }
         comment.incrementDislikes();
-        super.Comments.save(comment);
+        this.Comments.save(comment);
 
         super.Logger.info(String.format("Dislike comment (%s)", id));
 
