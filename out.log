@@ -1,0 +1,18 @@
+20:54:58.474 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 15244 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
+20:54:58.477 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+20:55:02.652 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table comment drop foreign key FK_61mgdkv1yj5lo5vbvl8m3ddxr
+20:55:02.653 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - Can't DROP 'FK_61mgdkv1yj5lo5vbvl8m3ddxr'; check that column/key exists
+20:55:02.659 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture drop foreign key FK_t8f2ym2vsqbv0wrq3cv3h9vit
+20:55:02.659 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - Can't DROP 'FK_t8f2ym2vsqbv0wrq3cv3h9vit'; check that column/key exists
+20:55:02.676 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture_tags drop foreign key FK_bad4i7k8w1msfr1a0gylkxfxy
+20:55:02.676 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - Table 'projekt.picture_tags' doesn't exist
+20:55:02.677 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture_tags drop foreign key FK_4gk2j0ncn8mniwix80d8ijcd5
+20:55:02.677 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - Table 'projekt.picture_tags' doesn't exist
+20:55:05.138 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 7.167 seconds (JVM running for 7.67)
+20:55:15.660 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
+20:55:15.785 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
+20:55:22.422 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7
+20:55:32.629 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - [API] - Authors - Fetching all authors
+20:55:38.690 [http-nio-8080-exec-6] INFO  cz.tul.DemoApplication - [API] - Authors - Get author by Id: 0ae4dc36-8269-4e98-a8f6-1cf30b3d0867
+20:55:40.962 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - [API] - Authors - Get author by Id: 0ae4dc36-8269-4e98-a8f6-1cf30b3d0867
+20:55:48.017 [http-nio-8080-exec-8] INFO  cz.tul.DemoApplication - [API] - Authors - Get author by Id: 4ae4dc36-8269-4e98-a8f6-1cf30b3d0867
