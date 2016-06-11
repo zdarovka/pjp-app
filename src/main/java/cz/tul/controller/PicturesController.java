@@ -25,7 +25,7 @@ public class PicturesController extends BaseController{
 
     @RequestMapping({"/", "/pictures",  "/index"})
     public String index() {
-        Picture picture = this.Pictures.first();
+        Picture picture = this.Pictures.findAll().get(0);
         super.Logger.info(String.format("Redirect to picture (%s)", picture.getId()));
 
         return "redirect:/" + picture.getId();
@@ -36,8 +36,8 @@ public class PicturesController extends BaseController{
 
         Picture picture = this.Pictures.findOne(id);
 
-        Picture prev = this.Pictures.previous(picture.getDateCreated());
-        Picture next = this.Pictures.next(picture.getDateCreated());
+        Picture prev = this.Pictures.findFirstByIdLessThanOrderByIdDesc(id);
+        Picture next = this.Pictures.findFirstByIdGreaterThan(id);
 
         if(picture == null)
         {
@@ -60,8 +60,11 @@ public class PicturesController extends BaseController{
         }
 
         List<Comment> sorted = picture.getComments();
-        sorted.sort((p1, p2) -> p1.getDateCreated().compareTo(p2.getDateCreated()));
-        picture.setComments(sorted);
+        if(sorted != null) {
+            sorted.sort((p1, p2) -> p1.getDateCreated().compareTo(p2.getDateCreated()));
+            picture.setComments(sorted);
+        }
+
 
         return mav;
     }
