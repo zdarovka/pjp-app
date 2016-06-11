@@ -40,24 +40,29 @@ public class Comment {
     @Column
     private Date dateUpdated;
 
+    @ManyToOne(optional = false)
+    private Picture picture;
+
     public Comment(){
 
     }
 
-    public Comment(UUID id,Author author, String text)
+    public Comment(UUID id,Author author, String text, Picture picture)
     {
         this.id = id;
         this.author = author;
         this.text = text;
+        this.picture = picture;
         this.dateCreated = new Date();
         this.dateUpdated = new Date();
     }
 
-    public Comment(UUID id,Author author, String text, Date date)
+    public Comment(UUID id,Author author, String text, Picture picture, Date date)
     {
         this.id = id;
         this.author = author;
         this.text = text;
+        this.picture = picture;
         this.dateCreated = date;
         this.dateUpdated = date;
     }
@@ -120,5 +125,9 @@ public class Comment {
 
     public void incrementDislikes(){
         this.dislikes++;
+    }
+
+    public Picture getPicture() {
+        return picture;
     }
 }

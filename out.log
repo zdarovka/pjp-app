@@ -1,0 +1,11 @@
+23:20:00.066 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on PetrB-PC with PID 8596 (started by Petr in C:\Users\Petr\Documents\TUL\PPJ PROJEKT MINE\pjp-app)
+23:20:00.135 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mongo
+23:20:10.670 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 11.376 seconds (JVM running for 11.928)
+23:20:16.303 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Redirect to picture (04b24468-59b8-47df-b7bc-12361a254ad7)
+23:20:16.347 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
+23:20:16.347 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - prev picture (b042e337-2108-41ad-b16f-60325949994f)
+23:20:21.500 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - Showing picture (b042e337-2108-41ad-b16f-60325949994f)
+23:20:21.500 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - prev picture (51883ced-6f1f-4639-8010-a14882112f43)
+23:20:21.501 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - next picture (04b24468-59b8-47df-b7bc-12361a254ad7)
+23:20:23.763 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - Showing picture (51883ced-6f1f-4639-8010-a14882112f43)
+23:20:23.763 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - next picture (b042e337-2108-41ad-b16f-60325949994f)

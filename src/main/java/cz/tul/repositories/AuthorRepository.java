@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface AuthorRepository extends CrudRepository<Author, UUID>, AuthorCustomRepository {
+public interface AuthorRepository extends CrudRepository<Author, UUID> {
     List<Author> findByName(String name);
 
     List<Author> findAll();

@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  */
 @Transactional
 @Component
-@Profile({"prod_mysql", "prod_mysql"})
+@Profile({"prod_mysql", "prod_mongo"})
 public class DBProvisioner implements InitializingBean {
 
     private static final Logger log = LoggerFactory.getLogger(DBProvisioner.class);
@@ -62,7 +62,7 @@ public class DBProvisioner implements InitializingBean {
         boolean isEmpty = authorRepository.count() == 0;
         if (isEmpty) {
 
-            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/Author.txt")))) {
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/authors.txt")))) {
                 List<Author> els = read.lines().map(s -> s.split("\\s"))
                         .map(a -> new Author(UUID.fromString(a[0]), a[1], DataHelper.randomDate())).collect(Collectors.toList());
                 authorRepository.save(els);
@@ -88,7 +88,7 @@ public class DBProvisioner implements InitializingBean {
         boolean isEmpty = tagRepository.count() == 0;
         if (isEmpty) {
 
-            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/picturetags.txt")))) {
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/tags.txt")))) {
                 List<Tag> els = read.lines().map(s -> s.split("\\s"))
                         .map(a -> new Tag(UUID.fromString(a[0]), a[1])).collect(Collectors.toList());
                 tagRepository.save(els);
@@ -103,7 +103,7 @@ public class DBProvisioner implements InitializingBean {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/comments.txt")))) {
                 List<Comment> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Comment(UUID.fromString(a[0]), authorRepository.findOne(UUID.fromString(a[1])),a[2], DataHelper.randomDate())).collect(Collectors.toList());
+                        .map(a -> new Comment(UUID.fromString(a[0]), authorRepository.findOne(UUID.fromString(a[1])),a[2], pictureRepository.findOne(UUID.fromString(a[3])), DataHelper.randomDate())).collect(Collectors.toList());
                 commentRepository.save(els);
             }
         }
@@ -125,11 +125,9 @@ public class DBProvisioner implements InitializingBean {
 
     private boolean provisionCommentsForPicture() throws IOException {
 
-        int max = (int)commentRepository.count();
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
-            int lowI = DataHelper.randomNumber(0,max);
-            p.setComments(commentRepository.findAll().subList(lowI,DataHelper.randomNumber(lowI,max)));
+            p.setComments(commentRepository.findByPictureId(p.getId()));
             pictureRepository.save(p);
         }
 
@@ -141,7 +139,7 @@ public class DBProvisioner implements InitializingBean {
         int max = (int)authorRepository.count();
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
-            p.setAuthor(authorRepository.random());
+            p.setAuthor(authorRepository.findAll().get(0));
             pictureRepository.save(p);
         }
 

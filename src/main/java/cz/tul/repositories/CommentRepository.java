@@ -9,5 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, UUID> {
+
     List<Comment> findAll();
+    List<Comment> findByPictureId(UUID pictureId);
 }

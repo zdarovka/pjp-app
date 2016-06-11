@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface PictureRepository extends CrudRepository<Picture, UUID>, CustomPictureRepository {
+public interface PictureRepository extends CrudRepository<Picture, UUID> {
 
     List<Picture> findAll();
     List<Picture> findByName(String name);
     List<Picture> findByAuthorId(UUID id);
     List<Picture> findByTagsName(String tag);
+
+    Picture findFirstByIdLessThanOrderByIdDesc(UUID id);
+    Picture findFirstByIdGreaterThan(UUID id);
 }
