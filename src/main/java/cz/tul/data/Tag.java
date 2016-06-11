@@ -40,7 +40,20 @@ public class Tag {
     }
 
     public Tag(){
-
     }
 
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tag tag = (Tag) o;
+
+        return id != null ? id.equals(tag.id) : tag.id == null;
+    }
 }

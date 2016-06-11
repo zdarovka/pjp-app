@@ -1,0 +1,12 @@
+19:44:21.279 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table comment drop constraint FK_61mgdkv1yj5lo5vbvl8m3ddxr
+19:44:21.281 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.COMMENT
+19:44:21.281 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture drop constraint FK_t8f2ym2vsqbv0wrq3cv3h9vit
+19:44:21.281 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.PICTURE
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture_comments drop constraint FK_iob95283r6n0y0ca1n3now3gy
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.PICTURE_COMMENTS
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture_comments drop constraint FK_89b6tj5cn05l97eitpw47rys2
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.PICTURE_COMMENTS
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture_tags drop constraint FK_bad4i7k8w1msfr1a0gylkxfxy
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.PICTURE_TAGS
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - HHH000389: Unsuccessful: alter table picture_tags drop constraint FK_4gk2j0ncn8mniwix80d8ijcd5
+19:44:21.282 [main] ERROR o.h.tool.hbm2ddl.SchemaExport - user lacks privilege or object not found: PUBLIC.PICTURE_TAGS

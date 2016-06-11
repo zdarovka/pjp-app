@@ -30,6 +30,7 @@ public class Picture {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "author")
+    @DBRef
     private Author author;
 
     @Column
