@@ -62,7 +62,7 @@ public class DBProvisioner implements InitializingBean {
         boolean isEmpty = authorRepository.count() == 0;
         if (isEmpty) {
 
-            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/Author.txt")))) {
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/authors.txt")))) {
                 List<Author> els = read.lines().map(s -> s.split("\\s"))
                         .map(a -> new Author(UUID.fromString(a[0]), a[1], DataHelper.randomDate())).collect(Collectors.toList());
                 authorRepository.save(els);
@@ -88,7 +88,7 @@ public class DBProvisioner implements InitializingBean {
         boolean isEmpty = tagRepository.count() == 0;
         if (isEmpty) {
 
-            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/picturetags.txt")))) {
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/tags.txt")))) {
                 List<Tag> els = read.lines().map(s -> s.split("\\s"))
                         .map(a -> new Tag(UUID.fromString(a[0]), a[1])).collect(Collectors.toList());
                 tagRepository.save(els);
