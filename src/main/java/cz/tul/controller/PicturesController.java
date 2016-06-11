@@ -1,11 +1,9 @@
 package cz.tul.controller;
 
-import cz.tul.code.DataHelper;
 import cz.tul.code.ResourceNotFoundException;
-import cz.tul.data.Author;
 import cz.tul.data.Comment;
 import cz.tul.data.Picture;
-import cz.tul.repositories.AuthorRepository;
+import cz.tul.repositories.PictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +20,12 @@ import java.util.UUID;
 @Controller
 public class PicturesController extends BaseController{
 
-    //temp repository, will be removed
     @Autowired
-    AuthorRepository authors;
-
-
+    PictureRepository Pictures;
 
     @RequestMapping({"/", "/pictures",  "/index"})
     public String index() {
-        Picture picture = super.Pictures.first();
+        Picture picture = this.Pictures.first();
         super.Logger.info(String.format("Redirect to picture (%s)", picture.getId()));
 
         return "redirect:/" + picture.getId();
@@ -39,10 +34,10 @@ public class PicturesController extends BaseController{
     @RequestMapping({"/{id}",  "/pictures/{id}", "/index/{id}"})
     public ModelAndView index(@PathVariable("id") UUID id) {
 
-        Picture picture = super.Pictures.findOne(id);
+        Picture picture = this.Pictures.findOne(id);
 
-        Picture prev = super.Pictures.previous(picture.getDateCreated());
-        Picture next = super.Pictures.next(picture.getDateCreated());
+        Picture prev = this.Pictures.previous(picture.getDateCreated());
+        Picture next = this.Pictures.next(picture.getDateCreated());
 
         if(picture == null)
         {
@@ -75,14 +70,14 @@ public class PicturesController extends BaseController{
     @RequestMapping("/pictures/{id}/like")
     public int like(@PathVariable("id") UUID id) {
 
-        Picture picture = super.Pictures.findOne(id);
+        Picture picture = this.Pictures.findOne(id);
 
         if(picture == null)
         {
             throw new ResourceNotFoundException();
         }
         picture.incrementLike();
-        super.Pictures.save(picture);
+        this.Pictures.save(picture);
 
         super.Logger.info(String.format("Like picture (%s)", id));
 
@@ -93,14 +88,14 @@ public class PicturesController extends BaseController{
     @RequestMapping("/pictures/{id}/dislike")
     public int dislike(@PathVariable("id") UUID id) {
 
-        Picture picture = super.Pictures.findOne(id);
+        Picture picture = this.Pictures.findOne(id);
 
         if(picture == null)
         {
             throw new ResourceNotFoundException();
         }
         picture.incrementDislikes();
-        super.Pictures.save(picture);
+        this.Pictures.save(picture);
 
         super.Logger.info(String.format("Dislike picture (%s)", id));
 

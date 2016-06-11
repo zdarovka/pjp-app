@@ -1,13 +1,33 @@
 package cz.tul.api;
 
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import cz.tul.DemoApplication;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by zdars on 30.05.2016.
  */
-@RestController
-@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public abstract class ApiBaseController {
+
+
+    protected org.slf4j.Logger Logger = LoggerFactory.getLogger(DemoApplication.class);
+
+    protected void LogAuthors(String msg)
+    {
+        this.Logger.info("[API] - Authors - " + msg);
+    }
+
+    protected void LogPictures(String msg)
+    {
+        this.Logger.info("[API] - Pictures - " + msg);
+    }
+
+    protected void LogTags(String msg)
+    {
+        this.Logger.info("[API] - Tags - " + msg);
+    }
+
+    protected void LogComments(String msg)
+    {
+        this.Logger.info("[API] - Comments - " + msg);
+    }
 }
