@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,20 +49,20 @@ public class DBProvisioner implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        provisionAuthorCollectionIfEmpty();
-        provisionPictureCollectionIfEmpty();
-        provisionTagCollectionIfEmpty();
-        provisionCommentCollectionIfEmpty();
+        provisionAuthorCollection();
+        provisionPictureCollection();
+        provisionTagCollection();
+        provisionCommentCollection();
         provisionTagsForPicture();
         provisionAuthorForPicture();
         provisionCommentsForPicture();
     }
 
-    private boolean provisionAuthorCollectionIfEmpty() throws IOException {
+    private boolean provisionAuthorCollection() throws IOException {
         boolean isEmpty = authorRepository.count() == 0;
         if (isEmpty) {
 
-            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/Autor.txt")))) {
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/Author.txt")))) {
                 List<Author> els = read.lines().map(s -> s.split("\\s"))
                         .map(a -> new Author(UUID.fromString(a[0]), a[1], DataHelper.randomDate())).collect(Collectors.toList());
                 authorRepository.save(els);
@@ -72,7 +71,7 @@ public class DBProvisioner implements InitializingBean {
         return isEmpty;
     }
 
-    private boolean provisionPictureCollectionIfEmpty() throws IOException {
+    private boolean provisionPictureCollection() throws IOException {
         boolean isEmpty = pictureRepository.count() == 0;
         if (isEmpty) {
 
@@ -85,20 +84,20 @@ public class DBProvisioner implements InitializingBean {
         return isEmpty;
     }
 
-    private boolean provisionTagCollectionIfEmpty() throws IOException {
+    private boolean provisionTagCollection() throws IOException {
         boolean isEmpty = tagRepository.count() == 0;
         if (isEmpty) {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/picturetags.txt")))) {
                 List<Tag> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Tag(UUID.fromString(a[0]), a[2])).collect(Collectors.toList());
+                        .map(a -> new Tag(UUID.fromString(a[0]), a[1])).collect(Collectors.toList());
                 tagRepository.save(els);
             }
         }
         return isEmpty;
     }
 
-    private boolean provisionCommentCollectionIfEmpty() throws IOException {
+    private boolean provisionCommentCollection() throws IOException {
         boolean isEmpty = commentRepository.count() == 0;
         if (isEmpty) {
 

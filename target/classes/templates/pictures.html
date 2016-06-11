@@ -80,7 +80,6 @@
 
 <script type="text/javascript">
     $(document).on("click", "#pic-like", function(e){
-
         var id = $(this).attr("href");
         return req("/pictures/" + id + "/like", $(this), e);
     });
@@ -108,6 +107,7 @@
         e.preventDefault();
         return false;
     }
+    
 </script>
 
 </body>
