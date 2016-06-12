@@ -63,9 +63,21 @@ public class DBProvisioner implements InitializingBean {
         if (isEmpty) {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/authors.txt")))) {
-                List<Author> els = read.lines().map(s -> s.split("\\s"))
-                        .map(a -> new Author(UUID.fromString(a[0]), a[1], DataHelper.randomDate())).collect(Collectors.toList());
-                authorRepository.save(els);
+
+                String line;
+                while ((line = read.readLine()) != null) {
+                    String[] values = line.split("\\s");
+
+                    UUID id = UUID.fromString(values[0]);
+                    String t = values[1];
+
+                    Author newC = new Author(id, t);
+                    authorRepository.save(newC);
+                }
+
+              // List<Author> els = read.lines().map(s -> s.split("\\s"))
+              //         .map(a -> new Author(UUID.fromString(a[0]), a[1], DataHelper.randomDate())).collect(Collectors.toList());
+              // authorRepository.save(els);
             }
         }
         return isEmpty;
@@ -102,9 +114,23 @@ public class DBProvisioner implements InitializingBean {
         if (isEmpty) {
 
             try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/comments.txt")))) {
-            List<Comment> els = read.lines().map(s -> s.split("\\s"))
-                 .map(a -> new Comment(UUID.fromString(a[0]), authorRepository.findOne(UUID.fromString(a[1])),a[2], pictureRepository.findOne(UUID.fromString(a[3])), DataHelper.randomDate())).collect(Collectors.toList());
-            commentRepository.save(els);
+
+          String line;
+          while ((line = read.readLine()) != null) {
+              String[] values = line.split("\\s");
+
+              UUID id = UUID.fromString(values[0]);
+              Author a = authorRepository.findOne(UUID.fromString(values[1]));
+              String t = values[2];
+              Picture p = pictureRepository.findOne(UUID.fromString(values[3]));
+
+              Comment newC = new Comment(id, a, t, p);
+              commentRepository.save(newC);
+          }
+
+          //  List<Comment> els = read.lines().map(s -> s.split("\\s"))
+          //       .map(a -> new Comment(UUID.fromString(a[0]), authorRepository.findOne(UUID.fromString(a[1])),a[2], pictureRepository.findOne(UUID.fromString(a[3])), DataHelper.randomDate())).collect(Collectors.toList());
+          //  commentRepository.save(els);
             }
         }
         return isEmpty;
@@ -119,8 +145,9 @@ public class DBProvisioner implements InitializingBean {
             int lowI = DataHelper.randomNumber(0,max);
             List<Tag> tags = tagRepository.findAll().subList(lowI,DataHelper.randomNumber(lowI,max));
 
-            for (Tag t: tags) {
-                p.addTag(t);
+            for (Tag t:tags) {
+                t.setPicture(p);
+                tagRepository.save(t);
             }
 
             pictureRepository.save(p);
@@ -131,11 +158,11 @@ public class DBProvisioner implements InitializingBean {
 
     private boolean provisionCommentsForPicture() throws IOException {
 
-      Iterable<Picture> pictures = pictureRepository.findAll();
-      for (Picture p : pictures) {
-          p.setComments(commentRepository.findByPictureId(p.getId()));
-          pictureRepository.save(p);
-      }
+        Iterable<Picture> pictures = pictureRepository.findAll();
+        for (Picture p : pictures) {
+            p.setComments(commentRepository.findByPictureId(p.getId()));
+            pictureRepository.save(p);
+        }
 
         return true;
     }
