@@ -15,6 +15,7 @@ public interface PictureRepository extends CrudRepository<Picture, UUID> {
     List<Picture> findByAuthorId(UUID id);
     List<Picture> findByTagsName(String tag);
 
+    Picture findOne(UUID id);
     Picture findFirstByIdLessThanOrderByIdDesc(UUID id);
     Picture findFirstByIdGreaterThan(UUID id);
 }
