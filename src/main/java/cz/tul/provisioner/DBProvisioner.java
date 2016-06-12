@@ -98,16 +98,16 @@ public class DBProvisioner implements InitializingBean {
     }
 
     private boolean provisionCommentCollection() throws IOException {
- boolean isEmpty = commentRepository.count() == 0;
- if (isEmpty) {
+        boolean isEmpty = commentRepository.count() == 0;
+        if (isEmpty) {
 
-     try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/comments.txt")))) {
-         List<Comment> els = read.lines().map(s -> s.split("\\s"))
+            try (BufferedReader read = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/provision/comments.txt")))) {
+            List<Comment> els = read.lines().map(s -> s.split("\\s"))
                  .map(a -> new Comment(UUID.fromString(a[0]), authorRepository.findOne(UUID.fromString(a[1])),a[2], pictureRepository.findOne(UUID.fromString(a[3])), DataHelper.randomDate())).collect(Collectors.toList());
-         commentRepository.save(els);
-     }
- }
- return isEmpty;
+            commentRepository.save(els);
+            }
+        }
+        return isEmpty;
 
     }
 

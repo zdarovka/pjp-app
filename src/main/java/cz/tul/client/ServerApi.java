@@ -2,6 +2,7 @@ package cz.tul.client;
 
 
 import cz.tul.data.Author;
+import cz.tul.data.Comment;
 import cz.tul.data.Picture;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,9 @@ public interface ServerApi {
 
     public static final String AUTHORS_PATH = "/api/authors";
     public static final String AUTHOR_PATH = AUTHORS_PATH + "/{id}";
+
+    public static final String COMMENTS_PATH = "/api/comments";
+    public static final String COMMENT_PATH = COMMENTS_PATH + "/{id}";
 
     //-----------------------------------------------------------------------
     // Picture API
@@ -37,6 +41,24 @@ public interface ServerApi {
     public Picture updatePicture(@RequestBody Picture picture, @Path("id") UUID id);
 
     //-----------------------------------------------------------------------
+    // Comments API
+
+    @GET(COMMENTS_PATH)
+    public List<Comment> getComments();
+
+    @GET(COMMENT_PATH)
+    public Author getComment(@Path("id") UUID id);
+
+    @DELETE(COMMENT_PATH)
+    public Author deleteComment(@Path("id") UUID id);
+
+    @POST(COMMENTS_PATH)
+    public Author addComment(@RequestBody Comment comment);
+
+    @PUT(COMMENT_PATH)
+    public Author updateComment(@RequestBody Comment comment, @Path("id") UUID id);
+
+    //--------------------------------------------------------------------------
     // Authors API
 
     @GET(AUTHORS_PATH)
@@ -54,5 +76,4 @@ public interface ServerApi {
     @PUT(AUTHOR_PATH)
     public Author updateAuthor(@RequestBody Author author, @Path("id") UUID id);
 
-    //--------------------------------------------------------------------------
 }
