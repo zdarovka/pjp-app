@@ -1,10 +1,20 @@
-18:59:54.640 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on PetrB-PC with PID 8112 (started by Petr in C:\Users\Petr\Documents\TUL\PPJ PROJEKT MINE\pjp-app)
-18:59:54.649 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-19:00:21.448 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 27.846 seconds (JVM running for 28.652)
-19:00:22.599 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Redirect to picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:00:22.645 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Redirect to picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:00:48.985 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:00:48.986 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - next picture (51883ced-6f1f-4639-8010-a14882112f43)
-19:01:28.325 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - Showing picture (51883ced-6f1f-4639-8010-a14882112f43)
-19:01:28.325 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - prev picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:01:28.325 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - next picture (b042e337-2108-41ad-b16f-60325949994f)
+20:09:59.101 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 9964 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
+20:09:59.107 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+20:10:09.283 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 10.932 seconds (JVM running for 11.743)
+20:10:13.325 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Authors - Fetching all authors
+20:10:51.127 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - [API] - Authors - Created author: 1080cac1-74bc-4db9-a043-24de04aa3974
+20:10:58.032 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - [API] - Authors - Fetching all authors
+20:11:16.952 [http-nio-8080-exec-6] INFO  cz.tul.DemoApplication - [API] - Authors - Updated author: 1080cac1-74bc-4db9-a043-24de04aa3974
+20:11:19.054 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - [API] - Authors - Fetching all authors
+20:11:28.253 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - [API] - Comments - Fetching all comments
+20:12:35.019 [http-nio-8080-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Failed to read HTTP message: org.springframework.http.converter.HttpMessageNotReadableException: Could not read document: Unexpected character ('}' (code 125)): was expecting double-quote to start field name
+ at [Source: java.io.PushbackInputStream@dce2be; line: 5, column: 4]; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('}' (code 125)): was expecting double-quote to start field name
+ at [Source: java.io.PushbackInputStream@dce2be; line: 5, column: 4]
+20:12:47.663 [http-nio-8080-exec-1] WARN  cz.tul.DemoApplication - API - Comment - Picture not found
+20:14:32.201 [http-nio-8080-exec-2] WARN  cz.tul.DemoApplication - API - Comment - Picture not found
+20:15:09.059 [http-nio-8080-exec-3] WARN  cz.tul.DemoApplication - API - Comment - Picture not found
+20:15:44.399 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - [API] - Comments - Created comment: 61e78643-34b0-496f-a298-c4740f6ef416
+20:15:49.606 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - [API] - Comments - Fetching all comments
+20:17:00.719 [http-nio-8080-exec-7] WARN  o.s.web.servlet.PageNotFound - Request method 'POST' not supported
+20:17:04.986 [http-nio-8080-exec-8] INFO  cz.tul.DemoApplication - [API] - Comments - Updated comment: 61e78643-34b0-496f-a298-c4740f6ef416
+20:17:09.594 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - [API] - Comments - Fetching all comments
