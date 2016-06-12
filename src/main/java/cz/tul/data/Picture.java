@@ -54,6 +54,7 @@ public class Picture {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "picture")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @Column(name = "tags", length = 16)
     @DBRef
     private List<Tag> tags;
 
