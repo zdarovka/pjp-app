@@ -1,33 +1,10 @@
-12:29:10.565 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 18184 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
-12:29:10.569 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-12:29:17.967 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 7.92 seconds (JVM running for 8.338)
-12:29:23.169 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
-12:30:07.402 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7
-12:30:20.011 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - Redirect to picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-12:30:20.046 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-12:30:20.047 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - next picture (51883ced-6f1f-4639-8010-a14882112f43)
-12:30:21.769 [http-nio-8080-exec-6] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-12:30:21.769 [http-nio-8080-exec-6] INFO  cz.tul.DemoApplication - next picture (51883ced-6f1f-4639-8010-a14882112f43)
-12:30:23.443 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - Dislike comment (d9fbca00-2e4b-42cd-bfe0-fb8691ea679a)
-12:30:23.585 [http-nio-8080-exec-8] INFO  cz.tul.DemoApplication - Dislike comment (d9fbca00-2e4b-42cd-bfe0-fb8691ea679a)
-12:30:23.709 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - Dislike comment (d9fbca00-2e4b-42cd-bfe0-fb8691ea679a)
-12:30:23.838 [http-nio-8080-exec-10] INFO  cz.tul.DemoApplication - Dislike comment (d9fbca00-2e4b-42cd-bfe0-fb8691ea679a)
-12:30:23.978 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Dislike comment (d9fbca00-2e4b-42cd-bfe0-fb8691ea679a)
-12:30:24.262 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:24.411 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:24.540 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:24.687 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:24.824 [http-nio-8080-exec-6] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:24.960 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:25.090 [http-nio-8080-exec-8] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:25.237 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:25.361 [http-nio-8080-exec-10] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:25.513 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:25.616 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Like comment (3f02f20a-056d-4454-bb47-b169a1bac66e)
-12:30:25.953 [http-nio-8080-exec-3] INFO  cz.tul.DemoApplication - Like comment (8fba7570-a046-4a9c-83d9-a1cb4915525f)
-12:30:26.088 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - Like comment (8fba7570-a046-4a9c-83d9-a1cb4915525f)
-12:30:26.230 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - Like comment (8fba7570-a046-4a9c-83d9-a1cb4915525f)
-12:30:26.366 [http-nio-8080-exec-6] INFO  cz.tul.DemoApplication - Like comment (8fba7570-a046-4a9c-83d9-a1cb4915525f)
-12:30:26.499 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - Like comment (8fba7570-a046-4a9c-83d9-a1cb4915525f)
-12:30:26.658 [http-nio-8080-exec-8] INFO  cz.tul.DemoApplication - Like comment (8fba7570-a046-4a9c-83d9-a1cb4915525f)
-12:30:28.369 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7
+12:36:49.126 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 20092 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
+12:36:49.135 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+12:36:56.602 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 7.983 seconds (JVM running for 8.419)
+12:37:00.647 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
+12:37:12.253 [http-nio-8080-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [java.util.UUID]; nested exception is java.lang.NumberFormatException: For input string: "12361a254ad7""
+12:37:14.404 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
+12:37:14.405 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - next picture (51883ced-6f1f-4639-8010-a14882112f43)
+12:37:26.303 [http-nio-8080-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [java.util.UUID]; nested exception is java.lang.NumberFormatException: For input string: "12361a254ad7""
+12:37:28.914 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7
+12:37:29.060 [http-nio-8080-exec-10] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7

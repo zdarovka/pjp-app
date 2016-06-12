@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "author")
 @Document(collection = "author")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ref")
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="id")
 public class Author {
 
     @Id

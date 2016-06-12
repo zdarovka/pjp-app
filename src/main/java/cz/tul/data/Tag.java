@@ -13,7 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name="tag")
 @Document(collection = "tag")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ref")
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="id")
 public class Tag {
 
     @Id

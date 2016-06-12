@@ -15,7 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name="picture")
 @Document(collection = "picture")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ref")
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="id")
 public class Picture {
 
     @Id
