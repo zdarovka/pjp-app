@@ -48,7 +48,7 @@ public class Picture {
     @Column
     private int dislikes;
 
-    @OneToMany(mappedBy="picture", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="picture", fetch = FetchType.LAZY)
     @DBRef
     private List<Comment> comments;
 
