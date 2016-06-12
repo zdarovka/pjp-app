@@ -6,6 +6,7 @@ import cz.tul.data.Tag;
 import cz.tul.repositories.AuthorRepository;
 import cz.tul.repositories.CommentRepository;
 import cz.tul.repositories.PictureRepository;
+import cz.tul.repositories.TagRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -37,6 +38,10 @@ public class DemoApplicationTests {
 
 	@Autowired
 	PictureRepository pictureRepository;
+
+	@Autowired
+	TagRepository tagRepository;
+
 
 	private static final String authorName1 = "Peter";
 	private static final UUID authorId1 = UUID.randomUUID();
@@ -81,6 +86,9 @@ public class DemoApplicationTests {
         pictureRepository.save(Collections.newArrayList(
         		picture1, picture2
         ));
+
+		tagRepository.save(lT);
+		tagRepository.save(lT2);
 	}
 
 	@Test
@@ -113,17 +121,20 @@ public class DemoApplicationTests {
 
 	@Test
 	public void findByTags() {
-		List<Picture> result = pictureRepository.findByTagsName(tagName1);
+		List<Picture> result = pictureRepository.findByTags(tg1);
 		Assert.assertEquals(1, result.size());
 		for (Picture picture : result) {
 			Assert.assertTrue(picture.getTags().contains(tg1));
 		}
 
-		result = pictureRepository.findByTagsName("randomtag");
+		Tag random = new Tag(UUID.randomUUID(), "random");
+		tagRepository.save(random);
+
+		result = pictureRepository.findByTags(random);
 		Assert.assertEquals(0, result.size());
 
 
-		result = pictureRepository.findByTagsName(tagName2);
+		result = pictureRepository.findByTags(tg2);
 		Assert.assertEquals(1, result.size());
 		for (Picture picture : result) {
 			Assert.assertTrue(picture.getTags().contains(tg2));

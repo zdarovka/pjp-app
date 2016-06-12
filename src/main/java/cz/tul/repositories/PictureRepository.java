@@ -1,6 +1,7 @@
 package cz.tul.repositories;
 
 import cz.tul.data.Picture;
+import cz.tul.data.Tag;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ public interface PictureRepository extends CrudRepository<Picture, UUID> {
     List<Picture> findByName(String name);
     List<Picture> findByAuthorId(UUID id);
     List<Picture> findByTagsName(String tag);
+    List<Picture> findByTags(Tag tag);
 
     Picture findOne(UUID id);
     Picture findFirstByIdLessThanOrderByIdDesc(UUID id);
