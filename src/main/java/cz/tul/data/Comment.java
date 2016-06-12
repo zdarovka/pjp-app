@@ -1,5 +1,7 @@
 package cz.tul.data;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -12,6 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name="comment")
 @Document(collection = "comments")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ref")
 public class Comment {
 
     @Id
@@ -19,7 +22,7 @@ public class Comment {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "author")
     @DBRef

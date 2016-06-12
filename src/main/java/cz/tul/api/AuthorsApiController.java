@@ -39,7 +39,13 @@ public class AuthorsApiController extends ApiBaseController {
     @RequestMapping(value = ServerApi.AUTHOR_PATH, method = RequestMethod.GET)
     public ResponseEntity<Author> getAuthor(@PathVariable("id") UUID id) {
 
+        Author author = this.Authors.findOne(id);
+        if(author == null)
+        {
+            super.Logger.warn("API - Authors - Author not found: " + id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         super.LogAuthors("Get author by Id: " + id);
-        return new ResponseEntity<>(this.Authors.findOne(id), HttpStatus.OK);
+        return new ResponseEntity<>(author, HttpStatus.OK);
     }
 }

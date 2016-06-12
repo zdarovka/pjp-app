@@ -1,5 +1,7 @@
 package cz.tul.data;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "author")
 @Document(collection = "author")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ref")
 public class Author {
 
     @Id
