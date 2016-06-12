@@ -22,9 +22,8 @@ public class Comment {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "author")
+    @ManyToOne
+    @JoinColumn(name="author")
     @DBRef
     private Author author;
 
@@ -43,7 +42,9 @@ public class Comment {
     @Column
     private Date dateUpdated;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name="picture", nullable = true)
+    @DBRef
     private Picture picture;
 
     public Comment(){

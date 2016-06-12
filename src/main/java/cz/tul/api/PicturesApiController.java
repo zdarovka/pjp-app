@@ -85,7 +85,7 @@ public class PicturesApiController extends ApiBaseController {
             super.Logger.warn("API - Pictures - Picture for update not found");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            super.LogPictures("Updated picture: " + picture.getId());
+            super.LogPictures("Updated picture: " + id);
 
             Picture pic = this.Pictures.findOne(id);
             pic.setUrl(picture.getUrl());

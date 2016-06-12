@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +21,7 @@ public class Picture {
 
     @Id
     @org.springframework.data.annotation.Id
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(columnDefinition = "BINARY(16)", name="picture_id")
     private UUID id;
 
     @Column
@@ -29,9 +30,9 @@ public class Picture {
     @Column
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name="author")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "author")
     @DBRef
     private Author author;
 
@@ -47,16 +48,18 @@ public class Picture {
     @Column
     private int dislikes;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JoinColumn(name = "comment")
+    @OneToMany(mappedBy="picture", fetch = FetchType.EAGER)
+    @DBRef
     private List<Comment> comments;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JoinColumn(name = "tag")
-    @JsonIgnore
-    private List<Tag> tags;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "image_tags",
+            joinColumns = {@JoinColumn(name = "picture_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")},
+            uniqueConstraints = {@UniqueConstraint(
+                    columnNames = {"picture_id", "tag_id"})})
+    @DBRef
+    private Set<Tag> tags;
 
     public Picture() {
     }
@@ -100,11 +103,11 @@ public class Picture {
         this.comments.add(comment);
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return this.tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 

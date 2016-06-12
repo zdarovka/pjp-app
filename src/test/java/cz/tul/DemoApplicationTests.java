@@ -60,27 +60,27 @@ public class DemoApplicationTests {
 		Author author1 = new Author(authorId1, authorName1);
 		Author author2 = new Author(authorId2, authorName2);
 
-		Picture picture1 = new Picture(UUID.randomUUID(), pictureName1, pictureUrl1, new Date());
-		picture1.setAuthor(author1);
-		List<Tag> lT = new ArrayList<Tag>();
-
-		lT.add(tg1);
-		picture1.setTags(lT);
-
-		Picture picture2 = new Picture(UUID.randomUUID(), pictureName2, pictureUrl2, new Date());
-		picture2.setAuthor(author2);
-		List<Tag> lT2 = new ArrayList<Tag>();
-
-		lT2.add(tg2);
-		picture2.setTags(lT2);
-
-		authorRepository.save(Collections.newArrayList(
-				author1, author2
-		));
-
-		pictureRepository.save(Collections.newArrayList(
-				picture1, picture2
-		));
+		//Picture picture1 = new Picture(UUID.randomUUID(), pictureName1, pictureUrl1, new Date());
+		//picture1.setAuthor(author1);
+		//Set<Tag> lT = new Set<Tag>();
+//
+		//lT.add(tg1);
+		//picture1.setTags(lT);
+//
+		//Picture picture2 = new Picture(UUID.randomUUID(), pictureName2, pictureUrl2, new Date());
+		//picture2.setAuthor(author2);
+		//Set<Tag> lT2 = new HastSet<Tag>();
+//
+		//lT2.add(tg2);
+		//picture2.setTags(lT2);
+//
+		//authorRepository.save(Collections.newArrayList(
+		//		author1, author2
+		//));
+//
+		//pictureRepository.save(Collections.newArrayList(
+		//		picture1, picture2
+		//));
 	}
 
 	@Test

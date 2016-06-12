@@ -2,13 +2,13 @@ package cz.tul.data;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.Cascade;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -51,6 +51,16 @@ public class Author {
         this.dateCreated = new Date();
         this.id = UUID.randomUUID();
     }
+
+    @OneToMany(mappedBy="author",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    @DBRef
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy="author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    @DBRef
+    private List<Picture> pictures;
 
     public String getName() {
         return this.name;
