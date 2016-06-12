@@ -21,7 +21,7 @@ public class Picture {
 
     @Id
     @org.springframework.data.annotation.Id
-    @Column(columnDefinition = "BINARY(16)", name="picture_id")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @Column
@@ -48,18 +48,14 @@ public class Picture {
     @Column
     private int dislikes;
 
-    @OneToMany(mappedBy="picture", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="picture", fetch = FetchType.LAZY)
     @DBRef
     private List<Comment> comments;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(name = "image_tags",
-            joinColumns = {@JoinColumn(name = "picture_id")},
-            inverseJoinColumns = {@JoinColumn(name = "tag_id")},
-            uniqueConstraints = {@UniqueConstraint(
-                    columnNames = {"picture_id", "tag_id"})})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "picture")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @DBRef
-    private Set<Tag> tags;
+    private List<Tag> tags;
 
     public Picture() {
     }
@@ -103,11 +99,11 @@ public class Picture {
         this.comments.add(comment);
     }
 
-    public Set<Tag> getTags() {
+    public List<Tag> getTags() {
         return this.tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Tag {
 
     @Id
-    @Column(columnDefinition = "BINARY(16)", name = "tag_id")
+    @Column(columnDefinition = "BINARY(16)")
     @org.springframework.data.annotation.Id
     private UUID id;
 
@@ -40,9 +40,10 @@ public class Tag {
         this.name = name;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "picture")
     @DBRef
-    private Set<Picture> pictures;
+    private Picture picture;
 
     public Tag(String name)
     {
@@ -67,11 +68,11 @@ public class Tag {
         return id != null ? id.equals(tag.id) : tag.id == null;
     }
 
-    public Set<Picture> getPicture() {
-        return this.pictures;
+    public Picture getPicture() {
+        return this.picture;
     }
 
-    public void setPicture(Set<Picture> pictures) {
-        this.pictures = pictures;
+    public void setPicture(Picture pictures) {
+        this.picture = pictures;
     }
 }
