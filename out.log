@@ -1,5 +1,0 @@
-20:01:38.032 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on PetrB-PC with PID 6400 (started by Petr in C:\Users\Petr\Documents\TUL\PPJ PROJEKT MINE\pjp-app)
-20:01:38.074 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-20:01:51.610 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 14.659 seconds (JVM running for 15.303)
-20:01:56.932 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
-20:03:07.793 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures

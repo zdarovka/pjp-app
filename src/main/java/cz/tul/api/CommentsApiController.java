@@ -33,14 +33,14 @@ public class CommentsApiController extends ApiBaseController{
     @RequestMapping(value = ServerApi.COMMENTS_PATH, method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> getComments() {
 
-        super.LogPictures("Fetching all comments");
+        super.LogComments("Fetching all comments");
         return new ResponseEntity<>(this.Comments.findAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = ServerApi.COMMENT_PATH, method = RequestMethod.GET)
     public ResponseEntity<Comment> getComment(@PathVariable("id") UUID id) {
 
-        super.LogPictures("Get Comment by Id: " + id);
+        super.LogComments("Get Comment by Id: " + id);
 
         Comment comment = this.Comments.findOne(id);
         if(comment == null)
@@ -83,10 +83,13 @@ public class CommentsApiController extends ApiBaseController{
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        Comment newCom = new Comment(UUID.randomUUID(), a, comment.getText(), p, comment.getDateCreated());
+        Comment newCom = new Comment(UUID.randomUUID(), a, comment.getText(), p, new Date());
+        newCom.setLikes(comment.getLikes());
+        newCom.setDislikes(comment.getDislikes());
+
 
         this.Comments.save(newCom);
-        super.LogPictures("Created comment: " + newCom.getId());
+        super.LogComments("Created comment: " + newCom.getId());
         return new ResponseEntity<>(newCom,HttpStatus.OK);
     }
 

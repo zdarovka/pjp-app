@@ -78,14 +78,6 @@ public class Author {
         this.dateCreated = dateCreated;
     }
 
-    public String getAuthorName() {
-        return name;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.name = authorName;
-    }
-
     public UUID getId() {
         return id;
     }
