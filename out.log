@@ -1,10 +1,5 @@
-18:59:54.640 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on PetrB-PC with PID 8112 (started by Petr in C:\Users\Petr\Documents\TUL\PPJ PROJEKT MINE\pjp-app)
-18:59:54.649 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-19:00:21.448 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 27.846 seconds (JVM running for 28.652)
-19:00:22.599 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - Redirect to picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:00:22.645 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - Redirect to picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:00:48.985 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:00:48.986 [http-nio-8080-exec-4] INFO  cz.tul.DemoApplication - next picture (51883ced-6f1f-4639-8010-a14882112f43)
-19:01:28.325 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - Showing picture (51883ced-6f1f-4639-8010-a14882112f43)
-19:01:28.325 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - prev picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-19:01:28.325 [http-nio-8080-exec-5] INFO  cz.tul.DemoApplication - next picture (b042e337-2108-41ad-b16f-60325949994f)
+20:01:38.032 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on PetrB-PC with PID 6400 (started by Petr in C:\Users\Petr\Documents\TUL\PPJ PROJEKT MINE\pjp-app)
+20:01:38.074 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+20:01:51.610 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 14.659 seconds (JVM running for 15.303)
+20:01:56.932 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
+20:03:07.793 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
