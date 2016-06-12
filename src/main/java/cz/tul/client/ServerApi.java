@@ -39,11 +39,20 @@ public interface ServerApi {
     //-----------------------------------------------------------------------
     // Authors API
 
-    @GET(PICTURES_PATH)
+    @GET(AUTHORS_PATH)
     public List<Author> getAuthors();
 
-    @GET(PICTURE_PATH)
+    @GET(AUTHOR_PATH)
     public Author getAuthor(@Path("id") UUID id);
+
+    @DELETE(AUTHOR_PATH)
+    public Author deleteAuthor(@Path("id") UUID id);
+
+    @POST(AUTHORS_PATH)
+    public Author addAuthor(@RequestBody Author author);
+
+    @PUT(AUTHOR_PATH)
+    public Author updateAuthor(@RequestBody Author author, @Path("id") UUID id);
 
     //--------------------------------------------------------------------------
 }
