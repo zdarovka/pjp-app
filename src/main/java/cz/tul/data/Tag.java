@@ -1,5 +1,7 @@
 package cz.tul.data;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name="tag")
 @Document(collection = "tag")
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="id")
 public class Tag {
 
     @Id

@@ -1,6 +1,7 @@
 package cz.tul.data;
 
 
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name="picture")
 @Document(collection = "picture")
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="id")
 public class Picture {
 
     @Id
@@ -27,7 +29,7 @@ public class Picture {
     @Column
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "author")
     @DBRef
@@ -45,14 +47,15 @@ public class Picture {
     @Column
     private int dislikes;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "comment")
     private List<Comment> comments;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "tag")
+    @JsonIgnore
     private List<Tag> tags;
 
     public Picture() {
@@ -97,7 +100,7 @@ public class Picture {
         this.comments.add(comment);
     }
 
-    public List<cz.tul.data.Tag> getTags() {
+    public List<Tag> getTags() {
         return this.tags;
     }
 
