@@ -47,7 +47,7 @@ public class Picture {
     @Column
     private int dislikes;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "comment")
     private List<Comment> comments;

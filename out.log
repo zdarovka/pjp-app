@@ -1,10 +1,5 @@
-12:36:49.126 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 20092 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
-12:36:49.135 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
-12:36:56.602 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 7.983 seconds (JVM running for 8.419)
-12:37:00.647 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures
-12:37:12.253 [http-nio-8080-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [java.util.UUID]; nested exception is java.lang.NumberFormatException: For input string: "12361a254ad7""
-12:37:14.404 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - Showing picture (04b24468-59b8-47df-b7bc-12361a254ad7)
-12:37:14.405 [http-nio-8080-exec-7] INFO  cz.tul.DemoApplication - next picture (51883ced-6f1f-4639-8010-a14882112f43)
-12:37:26.303 [http-nio-8080-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Failed to bind request element: org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type [java.lang.String] to required type [java.util.UUID]; nested exception is java.lang.NumberFormatException: For input string: "12361a254ad7""
-12:37:28.914 [http-nio-8080-exec-9] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7
-12:37:29.060 [http-nio-8080-exec-10] INFO  cz.tul.DemoApplication - [API] - Pictures - Get picture by Id: 04b24468-59b8-47df-b7bc-12361a254ad7
+13:19:51.994 [main] INFO  cz.tul.DemoApplication - Starting DemoApplication on Zenbook with PID 16108 (C:\Users\zdars\Documents\GitHub\pjp-app\target\classes started by zdars in C:\Users\zdars\Documents\GitHub\pjp-app)
+13:19:51.999 [main] INFO  cz.tul.DemoApplication - The following profiles are active: prod_mysql
+13:20:01.157 [main] INFO  cz.tul.DemoApplication - Started DemoApplication in 9.81 seconds (JVM running for 10.456)
+13:20:14.487 [http-nio-8080-exec-1] INFO  cz.tul.DemoApplication - [API] - Pictures - Updated picture: null
+13:20:24.617 [http-nio-8080-exec-2] INFO  cz.tul.DemoApplication - [API] - Pictures - Fetching all pictures

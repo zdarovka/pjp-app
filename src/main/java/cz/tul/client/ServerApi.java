@@ -1,10 +1,10 @@
 package cz.tul.client;
 
 
-import com.sun.org.apache.bcel.internal.generic.ATHROW;
 import cz.tul.data.Author;
 import cz.tul.data.Picture;
-import retrofit.client.Response;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestBody;
 import retrofit.http.*;
 
 import java.util.List;
@@ -18,11 +18,26 @@ public interface ServerApi {
     public static final String AUTHORS_PATH = "/api/authors";
     public static final String AUTHOR_PATH = AUTHORS_PATH + "/{id}";
 
+    //-----------------------------------------------------------------------
+    // Picture API
+
     @GET(PICTURES_PATH)
     public List<Picture> getPictures();
 
     @GET(PICTURE_PATH)
     public Picture getPicture(@Path("id") UUID id);
+
+    @DELETE(PICTURES_PATH)
+    public Picture deletePicture(@Path("id") UUID id);
+
+    @POST(PICTURES_PATH)
+    public Picture addPicture(@RequestBody Picture picture, @Param("author") UUID author);
+
+    @PUT(PICTURE_PATH)
+    public Picture updatePicture(@RequestBody Picture picture, @Path("id") UUID id);
+
+    //-----------------------------------------------------------------------
+    // Authors API
 
     @GET(PICTURES_PATH)
     public List<Author> getAuthors();
@@ -30,5 +45,5 @@ public interface ServerApi {
     @GET(PICTURE_PATH)
     public Author getAuthor(@Path("id") UUID id);
 
-
+    //--------------------------------------------------------------------------
 }
