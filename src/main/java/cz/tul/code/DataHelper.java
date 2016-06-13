@@ -1,5 +1,9 @@
 package cz.tul.code;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,6 +12,8 @@ import java.util.Date;
  * Created by zdars on 6/10/2016.
  */
 public final class DataHelper {
+
+    private static final Logger logger = LoggerFactory.getLogger(DataHelper.class);
 
     private DataHelper() {
 
@@ -32,7 +38,7 @@ public final class DataHelper {
         try {
             utilDate = formatter.parse(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return utilDate;
