@@ -22,9 +22,9 @@
 
     <logger name="org.springframework" LEVEL="WARN"/>
 
-    <logger name="ppj" LEVEL="INFO"/>
+    <logger name="cz.tul" LEVEL="INFO"/>
 
     <springProfile name="test">\
-        <logger name="ppj" level="ERROR"/>
+        <logger name="cz.tul" level="ERROR"/>
     </springProfile>
 </configuration>

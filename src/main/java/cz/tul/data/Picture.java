@@ -1,7 +1,8 @@
 package cz.tul.data;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -49,12 +49,13 @@ public class Picture {
     private int dislikes;
 
     @OneToMany(mappedBy="picture", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @DBRef
     private List<Comment> comments;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "picture")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @Column(name = "tags", length = 16)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Column(name = "tags")
     @DBRef
     private List<Tag> tags;
 
@@ -69,7 +70,7 @@ public class Picture {
         this.dateUpdated = d;
     }
 
-    public Picture(UUID id,String name, String url, Date d, int likes, int dislikes){
+    public Picture(UUID id, String name, String url, Date d, int likes, int dislikes){
         this.name = name;
         this.url = url;
         this.id = id;
