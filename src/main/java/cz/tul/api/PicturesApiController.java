@@ -33,11 +33,9 @@ import java.util.UUID;
 @RestController
 public class PicturesApiController{
 
-<<<<<<< HEAD
-=======
+
     private FileManager imageDataMgr;
 
->>>>>>> 0aefea0662892bd341c73ec70b6d2f6640547d36
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(PicturesApiController.class);
 
     @Autowired
@@ -158,7 +156,7 @@ public class PicturesApiController{
         }
     }
 
-<<<<<<< HEAD
+
     @RequestMapping(value = ServerApi.PICTURE_LIKE_PATH, method = RequestMethod.PUT)
     public ResponseEntity<Picture> likePicture(@PathVariable(value = "id") UUID id) {
         if (!this.Pictures.exists(id)) {
@@ -187,12 +185,12 @@ public class PicturesApiController{
             pic.incrementDislikes();
 
             this.Pictures.save(pic);
-            return new ResponseEntity<>(pic,HttpStatus.OK);
-=======
+            return new ResponseEntity<>(pic, HttpStatus.OK);
+        }
+    }
+
     @RequestMapping(value = ServerApi.UPLOAD_PATH, method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ImageStatus uploadImage(@PathVariable("name") String name,
+    public @ResponseBody ImageStatus uploadImage(@PathVariable("name") String name,
                             @RequestParam("data") MultipartFile imageData,
                             HttpServletResponse response) {
 
@@ -210,16 +208,11 @@ public class PicturesApiController{
     }
 
     public void setFileManager() {
-
         try {
-
             imageDataMgr = FileManager.get();
 
         } catch (IOException e) {
-
-            e.printStackTrace();
-
->>>>>>> 0aefea0662892bd341c73ec70b6d2f6640547d36
+            this.Logger.error(e.getMessage());
         }
     }
 }
