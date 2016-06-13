@@ -1,28 +1,20 @@
 package cz.tul.api;
 
-import com.sun.jna.platform.mac.MacFileUtils;
-import cz.tul.client.FileManager;
-import cz.tul.client.ImageStatus;
 import cz.tul.client.ServerApi;
+import cz.tul.code.FileManager;
 import cz.tul.data.Author;
 import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
 import cz.tul.repositories.PictureRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +26,7 @@ import java.util.UUID;
 public class PicturesApiController{
 
 
+    @Autowired
     private FileManager imageDataMgr;
 
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(PicturesApiController.class);
@@ -190,29 +183,34 @@ public class PicturesApiController{
     }
 
     @RequestMapping(value = ServerApi.UPLOAD_PATH, method = RequestMethod.POST)
-    public @ResponseBody ImageStatus uploadImage(@PathVariable("name") String name,
-                            @RequestParam("data") MultipartFile imageData,
-                            HttpServletResponse response) {
-
-        ImageStatus state = new ImageStatus(ImageStatus.ImageState.READY);
-
-        setFileManager();
-
-        try {
-            imageDataMgr.saveImageData(name, imageData.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+    public ResponseEntity<Picture> uploadImage(
+            @PathVariable("name") String name,
+            @PathVariable("author") UUID author,
+            @RequestParam("data") MultipartFile imageData)
+    {
+        if(!this.Authors.exists(author))
+        {
+            this.Logger.warn("Author not found");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return state;
-    }
-
-    public void setFileManager() {
         try {
-            imageDataMgr = FileManager.get();
+
+            String path = imageDataMgr.saveImageData(name, imageData.getInputStream());
+
+            Author a = this.Authors.findOne(author);
+            path = "file:///" + path.replace("\\", "/");
+            Picture p = new Picture(UUID.randomUUID(), name,  path, new Date());
+            p.setAuthor(a);
+
+            this.Pictures.save(p);
+            this.Logger.info("Picture uploaded: " + p.getId());
+            return new ResponseEntity<>(p, HttpStatus.OK);
 
         } catch (IOException e) {
             this.Logger.error(e.getMessage());
         }
+
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

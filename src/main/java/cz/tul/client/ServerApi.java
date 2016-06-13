@@ -3,7 +3,6 @@ package cz.tul.client;
 
 public interface ServerApi {
 
-    public static final String UPLOAD_PATH = "/api/upload/{name}";
 
 
     public static final String AUTHORS_PATH = "/api/authors";
@@ -18,6 +17,9 @@ public interface ServerApi {
 
 
     public static final String PICTURES_PATH = "/api/pictures";
+
+
+    public static final String UPLOAD_PATH = PICTURES_PATH + "/upload/{author}/{name}";
 
     public static final String PICTURE_PATH = PICTURES_PATH + "/{id}";
     public static final String PICTURE_LIKE_PATH = PICTURE_PATH + "/like";
