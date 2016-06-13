@@ -3,12 +3,14 @@ package cz.tul.data;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -48,12 +50,12 @@ public class Picture {
     @Column
     private int dislikes;
 
-    @OneToMany(mappedBy="picture", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="picture", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @DBRef
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "picture")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "picture", orphanRemoval = true, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Column(name = "tags")
     @DBRef
