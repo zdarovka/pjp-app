@@ -63,6 +63,7 @@ public class PicturesApiController{
     }
 
     @RequestMapping(value = ServerApi.PICTURES_BY_AUTHOR_PATH, method = RequestMethod.GET)
+    public ResponseEntity<List<Picture>> getPicturesByAuthor(@PathVariable("id") UUID id) {
 
         this.Logger.info("Get pictures by author: " + id);
 
@@ -75,6 +76,7 @@ public class PicturesApiController{
     }
 
     @RequestMapping(value = ServerApi.PICTURES_BY_TAG_PATH, method = RequestMethod.GET)
+    public ResponseEntity<List<Picture>> getPicturesByTag(@PathVariable("name") String name) {
 
         this.Logger.info("Get pictures by tag name: " + name);
 
@@ -133,6 +135,38 @@ public class PicturesApiController{
             pic.setLikes(picture.getLikes());
             pic.setName(picture.getName());
             pic.setDateUpdated(new Date());
+
+            this.Pictures.save(pic);
+            return new ResponseEntity<>(pic,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = ServerApi.PICTURE_LIKE_PATH, method = RequestMethod.PUT)
+    public ResponseEntity<Picture> likePicture(@PathVariable(value = "id") UUID id) {
+        if (!this.Pictures.exists(id)) {
+            this.Logger.warn("Picture for like not found");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            this.Logger.info("Liked picture: " + id);
+
+            Picture pic = this.Pictures.findOne(id);
+            pic.incrementLike();
+
+            this.Pictures.save(pic);
+            return new ResponseEntity<>(pic,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = ServerApi.PICTURE_DISLIKE_PATH, method = RequestMethod.PUT)
+    public ResponseEntity<Picture> dislikePicture(@PathVariable(value = "id") UUID id) {
+        if (!this.Pictures.exists(id)) {
+            this.Logger.warn("Picture for dislike not found");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            this.Logger.info("Disliked picture: " + id);
+
+            Picture pic = this.Pictures.findOne(id);
+            pic.incrementDislikes();
 
             this.Pictures.save(pic);
             return new ResponseEntity<>(pic,HttpStatus.OK);
