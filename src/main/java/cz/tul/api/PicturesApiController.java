@@ -1,6 +1,5 @@
 package cz.tul.api;
 
-import cz.tul.client.ServerApi;
 import cz.tul.data.Author;
 import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
@@ -21,6 +20,8 @@ import java.util.UUID;
 @RestController
 public class PicturesApiController{
 
+    public static final String PICTURES_PATH = "/api/pictures";
+    public static final String PICTURE_PATH = PICTURES_PATH + "/{id}";
 
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(PicturesApiController.class);
 
@@ -30,14 +31,14 @@ public class PicturesApiController{
     @Autowired
     private AuthorRepository Authors;
 
-    @RequestMapping(value = ServerApi.PICTURES_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = PICTURES_PATH, method = RequestMethod.GET)
     public ResponseEntity<List<Picture>> getPictures() {
 
         this.Logger.info("Fetching all pictures");
         return new ResponseEntity<>(this.Pictures.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = ServerApi.PICTURE_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = PICTURE_PATH, method = RequestMethod.GET)
     public ResponseEntity<Picture> getPicture(@PathVariable("id") UUID id) {
 
         this.Logger.info("Get picture by Id: " + id);
@@ -50,7 +51,7 @@ public class PicturesApiController{
         return new ResponseEntity<>(picture, HttpStatus.OK);
     }
 
-    @RequestMapping(value = ServerApi.PICTURE_PATH, method = RequestMethod.DELETE)
+    @RequestMapping(value = PICTURE_PATH, method = RequestMethod.DELETE)
     public ResponseEntity deletePicture(@PathVariable("id") UUID id) {
 
         if (this.Pictures.exists(id)) {
@@ -64,7 +65,7 @@ public class PicturesApiController{
         }
     }
 
-    @RequestMapping(value = ServerApi.PICTURES_PATH, method = RequestMethod.POST)
+    @RequestMapping(value = PICTURES_PATH, method = RequestMethod.POST)
     public ResponseEntity<Picture> addPicture(@RequestBody Picture picture, @RequestParam(value = "author", required = true) UUID author) {
 
         Author a = this.Authors.findOne(author);
@@ -83,7 +84,7 @@ public class PicturesApiController{
         return new ResponseEntity<>(newPic,HttpStatus.OK);
     }
 
-    @RequestMapping(value = ServerApi.PICTURE_PATH, method = RequestMethod.PUT)
+    @RequestMapping(value = PICTURE_PATH, method = RequestMethod.PUT)
     public ResponseEntity<Picture> updatePicture(@RequestBody Picture picture, @PathVariable(value = "id") UUID id) {
         if (!this.Pictures.exists(id)) {
             this.Logger.warn("Picture for update not found");
