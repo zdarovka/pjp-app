@@ -49,6 +49,43 @@ public class PicturesApiController{
         return new ResponseEntity<>(picture, HttpStatus.OK);
     }
 
+    @RequestMapping(value = ServerApi.PICTURES_BY_NAME_PATH, method = RequestMethod.GET)
+    public ResponseEntity<List<Picture>> getPicturesByName(@PathVariable("name") String name) {
+
+        this.Logger.info("Get pictures by name: " + name);
+
+        List<Picture> pictures = this.Pictures.findByNameIgnoreCaseContaining(name);
+        if(pictures == null)
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(pictures, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = ServerApi.PICTURES_BY_AUTHOR_PATH, method = RequestMethod.GET)
+
+        this.Logger.info("Get pictures by author: " + id);
+
+        List<Picture> pictures = this.Pictures.findByAuthorId(id);
+        if(pictures == null)
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(pictures, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = ServerApi.PICTURES_BY_TAG_PATH, method = RequestMethod.GET)
+
+        this.Logger.info("Get pictures by tag name: " + name);
+
+        List<Picture> pictures = this.Pictures.findByTagsName(name);
+        if(pictures == null)
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(pictures, HttpStatus.OK);
+    }
+
     @RequestMapping(value = ServerApi.PICTURE_PATH, method = RequestMethod.DELETE)
     public ResponseEntity deletePicture(@PathVariable("id") UUID id) {
 

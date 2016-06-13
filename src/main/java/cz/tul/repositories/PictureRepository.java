@@ -17,6 +17,8 @@ public interface PictureRepository extends CrudRepository<Picture, UUID> {
     List<Picture> findByTagsName(String tag);
     List<Picture> findByTags(Tag tag);
 
+    List<Picture> findByNameIgnoreCaseContaining(String name);
+
     Picture findOne(UUID id);
     Picture findFirstByIdLessThanOrderByIdDesc(UUID id);
     Picture findFirstByIdGreaterThan(UUID id);

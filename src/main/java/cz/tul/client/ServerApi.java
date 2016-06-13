@@ -14,5 +14,8 @@ public class ServerApi {
 
 
     public static final String PICTURES_PATH = "/api/pictures";
+    public static final String PICTURES_BY_NAME_PATH = PICTURES_PATH + "/name/{name}";
+    public static final String PICTURES_BY_AUTHOR_PATH = PICTURES_PATH + "/author/{id}";
+    public static final String PICTURES_BY_TAG_PATH = PICTURES_PATH + "/tag/{name}";
     public static final String PICTURE_PATH = PICTURES_PATH + "/{id}";
 }

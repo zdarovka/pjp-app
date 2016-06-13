@@ -21,8 +21,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import de.flapdoodle.embed.process.collections.Collections;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DemoApplication.class)
