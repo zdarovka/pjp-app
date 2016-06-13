@@ -7,6 +7,7 @@ import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
 import cz.tul.repositories.CommentRepository;
 import cz.tul.repositories.PictureRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,10 @@ import java.util.UUID;
  * Created by zdars on 30.05.2016.
  */
 @RestController
-public class CommentsApiController extends ApiBaseController{
+public class CommentsApiController {
+
+    private org.slf4j.Logger Logger = LoggerFactory.getLogger(CommentsApiController.class);
+
     @Autowired
     private PictureRepository Pictures;
 
@@ -33,14 +37,14 @@ public class CommentsApiController extends ApiBaseController{
     @RequestMapping(value = ServerApi.COMMENTS_PATH, method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> getComments() {
 
-        super.LogComments("Fetching all comments");
+        this.Logger.info("Fetching all comments");
         return new ResponseEntity<>(this.Comments.findAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = ServerApi.COMMENT_PATH, method = RequestMethod.GET)
     public ResponseEntity<Comment> getComment(@PathVariable("id") UUID id) {
 
-        super.LogComments("Get Comment by Id: " + id);
+        this.Logger.info("Get Comment by Id: " + id);
 
         Comment comment = this.Comments.findOne(id);
         if(comment == null)
@@ -54,12 +58,12 @@ public class CommentsApiController extends ApiBaseController{
     public ResponseEntity deleteComment(@PathVariable("id") UUID id) {
 
         if (this.Comments.exists(id)) {
-            super.LogPictures("Deleting comment: " + id);
+            this.Logger.info("Deleting comment: " + id);
 
             this.Comments.delete(id);
             return new ResponseEntity(HttpStatus.OK);
         } else {
-            super.Logger.warn("API - Comments - Comment for delete not found");
+            this.Logger.warn("Comment for delete not found");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
@@ -71,7 +75,7 @@ public class CommentsApiController extends ApiBaseController{
 
         if(a == null)
         {
-            super.Logger.warn("API - Comment - Author of comment not found");
+            this.Logger.warn("Author of comment not found");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
@@ -79,7 +83,7 @@ public class CommentsApiController extends ApiBaseController{
 
         if(p == null)
         {
-            super.Logger.warn("API - Comment - Picture not found");
+            this.Logger.warn("Picture not found");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
@@ -89,17 +93,17 @@ public class CommentsApiController extends ApiBaseController{
 
 
         this.Comments.save(newCom);
-        super.LogComments("Created comment: " + newCom.getId());
+        this.Logger.info("Created comment: " + newCom.getId());
         return new ResponseEntity<>(newCom,HttpStatus.OK);
     }
 
     @RequestMapping(value = ServerApi.COMMENT_PATH, method = RequestMethod.PUT)
     public ResponseEntity<Comment> updateComment(@RequestBody Comment comment, @PathVariable(value = "id") UUID id) {
         if (!this.Comments.exists(id)) {
-            super.Logger.warn("API - Comments - Comment for update not found");
+            this.Logger.warn("Comment for update not found");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            super.LogComments("Updated comment: " + id);
+            this.Logger.info("Updated comment: " + id);
 
             Comment com = this.Comments.findOne(id);
             com.setDislikes(comment.getDislikes());

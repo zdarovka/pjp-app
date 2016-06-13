@@ -3,6 +3,7 @@ package cz.tul.controller;
 import cz.tul.code.ResourceNotFoundException;
 import cz.tul.data.Comment;
 import cz.tul.repositories.CommentRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,10 @@ import java.util.UUID;
  * Created by zdars on 30.05.2016.
  */
 @Controller
-public class CommentsController extends BaseController{
+public class CommentsController {
+
+
+    protected org.slf4j.Logger Logger = LoggerFactory.getLogger(CommentsController.class);
 
     @Autowired
     private CommentRepository Comments;
@@ -33,7 +37,7 @@ public class CommentsController extends BaseController{
         comment.incrementLike();
         this.Comments.save(comment);
 
-        super.Logger.info(String.format("Like comment (%s)", id));
+        this.Logger.info(String.format("Like comment (%s)", id));
 
 
         return comment.getLikes();
@@ -52,7 +56,7 @@ public class CommentsController extends BaseController{
         comment.incrementDislikes();
         this.Comments.save(comment);
 
-        super.Logger.info(String.format("Dislike comment (%s)", id));
+        this.Logger.info(String.format("Dislike comment (%s)", id));
 
         return comment.getDislikes();
     }

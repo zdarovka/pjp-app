@@ -4,6 +4,7 @@ import cz.tul.code.ResourceNotFoundException;
 import cz.tul.data.Comment;
 import cz.tul.data.Picture;
 import cz.tul.repositories.PictureRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,9 @@ import java.util.UUID;
  * Created by zdars on 30.05.2016.
  */
 @Controller
-public class PicturesController extends BaseController{
+public class PicturesController {
+
+    protected org.slf4j.Logger Logger = LoggerFactory.getLogger(PicturesController.class);
 
     @Autowired
     PictureRepository Pictures;
@@ -26,7 +29,7 @@ public class PicturesController extends BaseController{
     @RequestMapping({"/", "/pictures",  "/index"})
     public String index() {
         Picture picture = this.Pictures.findAll().get(0);
-        super.Logger.info(String.format("Redirect to picture (%s)", picture.getId()));
+        this.Logger.info(String.format("Redirect to picture (%s)", picture.getId()));
 
         return "redirect:/" + picture.getId();
     }
@@ -44,18 +47,18 @@ public class PicturesController extends BaseController{
             throw new ResourceNotFoundException();
         }
 
-        super.Logger.info(String.format("Showing picture (%s)", picture.getId()));
+        this.Logger.info(String.format("Showing picture (%s)", picture.getId()));
 
         ModelAndView mav = new ModelAndView("pictures");
         mav.addObject("picture", picture );
         if(prev != null)
         {
-            super.Logger.info(String.format("prev picture (%s)", prev.getId()));
+            this.Logger.info(String.format("Previous picture (%s)", prev.getId()));
             mav.addObject("prev", prev);
         }
         if(next != null)
         {
-            super.Logger.info(String.format("next picture (%s)", next.getId()));
+            this.Logger.info(String.format("Next picture (%s)", next.getId()));
             mav.addObject("next", next);
         }
 
@@ -82,7 +85,7 @@ public class PicturesController extends BaseController{
         picture.incrementLike();
         this.Pictures.save(picture);
 
-        super.Logger.info(String.format("Like picture (%s)", id));
+        this.Logger.info(String.format("Like picture (%s)", id));
 
         return picture.getLikes();
     }
@@ -100,7 +103,7 @@ public class PicturesController extends BaseController{
         picture.incrementDislikes();
         this.Pictures.save(picture);
 
-        super.Logger.info(String.format("Dislike picture (%s)", id));
+        this.Logger.info(String.format("Dislike picture (%s)", id));
 
         return picture.getDislikes();
     }

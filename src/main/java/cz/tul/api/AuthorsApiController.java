@@ -5,10 +5,12 @@ package cz.tul.api;
  */
 
 
+import cz.tul.DemoApplication;
 import cz.tul.client.ServerApi;
 import cz.tul.data.Author;
 import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,9 @@ import java.util.UUID;
  * Created by zdars on 30.05.2016.
  */
 @RestController
-public class AuthorsApiController extends ApiBaseController {
+public class AuthorsApiController {
+
+    private org.slf4j.Logger Logger = LoggerFactory.getLogger(AuthorsApiController.class);
 
     @Autowired
     private AuthorRepository Authors;
@@ -30,7 +34,7 @@ public class AuthorsApiController extends ApiBaseController {
     @RequestMapping(value = ServerApi.AUTHORS_PATH, method = RequestMethod.GET)
     public ResponseEntity<List<Author>> getAuthors() {
 
-        super.LogAuthors("Fetching all authors");
+        this.Logger.info("Fetching all authors");
         return new ResponseEntity<>(this.Authors.findAll(), HttpStatus.OK);
     }
 
@@ -40,10 +44,10 @@ public class AuthorsApiController extends ApiBaseController {
         Author author = this.Authors.findOne(id);
         if(author == null)
         {
-            super.Logger.warn("API - Authors - Author not found: " + id);
+            this.Logger.warn("Author not found: " + id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        super.LogAuthors("Get author by Id: " + id);
+        this.Logger.info("Get author by Id: " + id);
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
@@ -51,12 +55,12 @@ public class AuthorsApiController extends ApiBaseController {
     public ResponseEntity deleteAuthor(@PathVariable("id") UUID id) {
 
         if (this.Authors.exists(id)) {
-            super.LogAuthors("Deleting picture: " + id);
+            this.Logger.info("Deleting picture: " + id);
 
             this.Authors.delete(id);
             return new ResponseEntity(HttpStatus.OK);
         } else {
-            super.Logger.warn("API - Authors - Author for delete not found");
+            this.Logger.warn("Author for delete not found");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
@@ -67,7 +71,7 @@ public class AuthorsApiController extends ApiBaseController {
         Author newAuthor = new Author(author.getName());
 
         this.Authors.save(newAuthor);
-        super.LogAuthors("Created author: " + newAuthor.getId());
+        this.Logger.info("Created author: " + newAuthor.getId());
 
         return new ResponseEntity<>(newAuthor,HttpStatus.OK);
     }
@@ -76,10 +80,10 @@ public class AuthorsApiController extends ApiBaseController {
     public ResponseEntity<Author> updateAuthor(@RequestBody Author author, @PathVariable(value = "id") UUID id) {
 
         if (!this.Authors.exists(id)) {
-            super.Logger.warn("API - Authors - Author for update not found");
+            this.Logger.warn("Author for update not found");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            super.LogAuthors("Updated author: " + id);
+            this.Logger.info("Updated author: " + id);
 
             Author a = this.Authors.findOne(id);
             a.setName(author.getName());
