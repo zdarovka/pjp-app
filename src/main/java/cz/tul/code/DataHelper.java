@@ -1,19 +1,14 @@
 package cz.tul.code;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by zdars on 6/10/2016.
  */
 public final class DataHelper {
-
-    private static final Logger logger = LoggerFactory.getLogger(DataHelper.class);
 
     private DataHelper() {
 
@@ -25,21 +20,10 @@ public final class DataHelper {
     }
 
     public static Date randomDate() {
-        int year = 2016;
-        int month = randomNumber(1, 12);
-        int day = randomNumber(1, 28);
-        int hour = randomNumber(1, 23);
-        int minute = randomNumber(1, 59);
-
-        String date = year + "/" + month + "/" + day + " " + hour + ":" + minute;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        Date utilDate = null;
-        try {
-            utilDate = formatter.parse(date);
-        } catch (ParseException e) {
-            logger.error(e.getMessage());
-        }
+        //Random date from 2016 to 2017
+        Random r =new Random();
+        long unixtime =(long) (1451606400+r.nextDouble()*60*60*24*365*1000);
+        Date utilDate = new Date(unixtime);
 
         return utilDate;
     }
