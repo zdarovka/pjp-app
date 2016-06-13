@@ -1,7 +1,5 @@
 package cz.tul.client;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -13,15 +11,12 @@ import java.nio.file.StandardCopyOption;
  * Created by Petr on 13. 6. 2016.
  */
 public class FileManager {
-    public static FileManager get() throws IOException {
-        return new FileManager();
-    }
 
-    @Value("${dataimg.path}")
     private String picsPath;
+    public FileManager(String picsPath) throws IOException {
+        this.picsPath = picsPath;
 
-    private FileManager() throws IOException {
-        Path path = Paths.get(picsPath);
+        Path path = Paths.get(this.picsPath);
         if (!Files.exists(path)) {
             Files.createDirectories(path);
         }
@@ -29,7 +24,7 @@ public class FileManager {
 
     private Path getImagePath(String filename) {
         assert (filename != null);
-        return Paths.get(picsPath).resolve(filename + ".jpg");
+        return Paths.get(this.picsPath).resolve(filename + ".jpg");
     }
 
     public void saveImageData(String filename, InputStream giftData) throws IOException {

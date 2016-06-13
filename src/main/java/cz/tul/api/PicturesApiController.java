@@ -1,6 +1,5 @@
 package cz.tul.api;
 
-import com.sun.jna.platform.mac.MacFileUtils;
 import cz.tul.client.FileManager;
 import cz.tul.client.ImageStatus;
 import cz.tul.client.ServerApi;
@@ -10,6 +9,7 @@ import cz.tul.repositories.AuthorRepository;
 import cz.tul.repositories.PictureRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -33,6 +28,9 @@ import java.util.UUID;
 @RestController
 public class PicturesApiController{
 
+
+    @Value("${dataimg.path}")
+    private String picsPath;
 
     private FileManager imageDataMgr;
 
@@ -196,23 +194,16 @@ public class PicturesApiController{
 
         ImageStatus state = new ImageStatus(ImageStatus.ImageState.READY);
 
-        setFileManager();
 
         try {
+            this.imageDataMgr = new FileManager(this.picsPath);
             imageDataMgr.saveImageData(name, imageData.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return state;
-    }
-
-    public void setFileManager() {
-        try {
-            imageDataMgr = FileManager.get();
-
+            
         } catch (IOException e) {
             this.Logger.error(e.getMessage());
         }
+
+        return state;
     }
 }
