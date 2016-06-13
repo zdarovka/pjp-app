@@ -170,10 +170,15 @@ public class DBProvisioner implements InitializingBean {
     private boolean provisionAuthorForPicture() throws IOException {
 
         int max = (int)authorRepository.count();
+        int counter = 0;
         Iterable<Picture> pictures = pictureRepository.findAll();
         for (Picture p : pictures) {
-            p.setAuthor(authorRepository.findAll().get(0));
+            p.setAuthor(authorRepository.findAll().get(counter));
             pictureRepository.save(p);
+
+            if(counter != max - 1){
+                counter++;
+            }
         }
 
        return true;

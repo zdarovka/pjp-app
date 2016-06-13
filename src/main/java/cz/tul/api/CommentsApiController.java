@@ -115,4 +115,36 @@ public class CommentsApiController {
             return new ResponseEntity<>(com,HttpStatus.OK);
         }
     }
+
+    @RequestMapping(value = ServerApi.COMMENT_LIKE_PATH, method = RequestMethod.PUT)
+    public ResponseEntity<Comment> likeComment(@PathVariable(value = "id") UUID id) {
+        if (!this.Comments.exists(id)) {
+            this.Logger.warn("Comment for like not found");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            this.Logger.info("Liked comment: " + id);
+
+            Comment com = this.Comments.findOne(id);
+            com.incrementLike();
+
+            this.Comments.save(com);
+            return new ResponseEntity<>(com,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = ServerApi.COMMENT_DISLIKE_PATH, method = RequestMethod.PUT)
+    public ResponseEntity<Comment> dislikeComment(@PathVariable(value = "id") UUID id) {
+        if (!this.Comments.exists(id)) {
+            this.Logger.warn("Comment for like not found");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            this.Logger.info("Liked comment: " + id);
+
+            Comment com = this.Comments.findOne(id);
+            com.incrementDislikes();
+
+            this.Comments.save(com);
+            return new ResponseEntity<>(com,HttpStatus.OK);
+        }
+    }
 }

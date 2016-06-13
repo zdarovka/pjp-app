@@ -29,5 +29,7 @@ public class DemoApplication extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+
+        log.info("Application started");
     }
 }

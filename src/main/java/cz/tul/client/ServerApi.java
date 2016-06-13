@@ -1,79 +1,29 @@
 package cz.tul.client;
 
-
-import cz.tul.data.Author;
-import cz.tul.data.Comment;
-import cz.tul.data.Picture;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.RequestBody;
-import retrofit.http.*;
-
-import java.util.List;
-import java.util.UUID;
-
-public interface ServerApi {
-
-    public static final String PICTURES_PATH = "/api/pictures";
-    public static final String PICTURE_PATH = PICTURES_PATH + "/{id}";
+/**
+ * Created by zdars on 6/13/2016.
+ */
+public class ServerApi {
 
     public static final String AUTHORS_PATH = "/api/authors";
     public static final String AUTHOR_PATH = AUTHORS_PATH + "/{id}";
 
+
     public static final String COMMENTS_PATH = "/api/comments";
+
     public static final String COMMENT_PATH = COMMENTS_PATH + "/{id}";
 
-    //-----------------------------------------------------------------------
-    // Picture API
+    public static final String COMMENT_LIKE_PATH = COMMENT_PATH + "/like";
+    public static final String COMMENT_DISLIKE_PATH = COMMENT_PATH + "/dislike";
 
-    @GET(PICTURES_PATH)
-    public List<Picture> getPictures();
 
-    @GET(PICTURE_PATH)
-    public Picture getPicture(@Path("id") UUID id);
+    public static final String PICTURES_PATH = "/api/pictures";
 
-    @DELETE(PICTURES_PATH)
-    public Picture deletePicture(@Path("id") UUID id);
+    public static final String PICTURE_PATH = PICTURES_PATH + "/{id}";
+    public static final String PICTURE_LIKE_PATH = PICTURE_PATH + "/like";
+    public static final String PICTURE_DISLIKE_PATH = PICTURE_PATH + "/dislike";
 
-    @POST(PICTURES_PATH)
-    public Picture addPicture(@RequestBody Picture picture, @Param("author") UUID author);
-
-    @PUT(PICTURE_PATH)
-    public Picture updatePicture(@RequestBody Picture picture, @Path("id") UUID id);
-
-    //-----------------------------------------------------------------------
-    // Comments API
-
-    @GET(COMMENTS_PATH)
-    public List<Comment> getComments();
-
-    @GET(COMMENT_PATH)
-    public Author getComment(@Path("id") UUID id);
-
-    @DELETE(COMMENT_PATH)
-    public Author deleteComment(@Path("id") UUID id);
-
-    @POST(COMMENTS_PATH)
-    public Author addComment(@RequestBody Comment comment);
-
-    @PUT(COMMENT_PATH)
-    public Author updateComment(@RequestBody Comment comment, @Path("id") UUID id);
-
-    //--------------------------------------------------------------------------
-    // Authors API
-
-    @GET(AUTHORS_PATH)
-    public List<Author> getAuthors();
-
-    @GET(AUTHOR_PATH)
-    public Author getAuthor(@Path("id") UUID id);
-
-    @DELETE(AUTHOR_PATH)
-    public Author deleteAuthor(@Path("id") UUID id);
-
-    @POST(AUTHORS_PATH)
-    public Author addAuthor(@RequestBody Author author);
-
-    @PUT(AUTHOR_PATH)
-    public Author updateAuthor(@RequestBody Author author, @Path("id") UUID id);
-
+    public static final String PICTURES_BY_NAME_PATH = PICTURES_PATH + "/name/{name}";
+    public static final String PICTURES_BY_AUTHOR_PATH = PICTURES_PATH + "/author/{id}";
+    public static final String PICTURES_BY_TAG_PATH = PICTURES_PATH + "/tag/{name}";
 }

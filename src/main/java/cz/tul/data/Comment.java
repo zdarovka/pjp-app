@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name="comment")
 @Document(collection = "comments")
-@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="id")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@ref")
 public class Comment {
 
     @Id
