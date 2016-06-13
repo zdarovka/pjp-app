@@ -1,5 +1,6 @@
 package cz.tul.api;
 
+import cz.tul.client.ServerApi;
 import cz.tul.data.Author;
 import cz.tul.data.Comment;
 import cz.tul.data.Picture;
@@ -22,10 +23,6 @@ import java.util.UUID;
 @RestController
 public class CommentsApiController {
 
-
-    public static final String COMMENTS_PATH = "/api/comments";
-    public static final String COMMENT_PATH = COMMENTS_PATH + "/{id}";
-
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(CommentsApiController.class);
 
     @Autowired
@@ -37,14 +34,14 @@ public class CommentsApiController {
     @Autowired
     private CommentRepository Comments;
 
-    @RequestMapping(value = COMMENTS_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = ServerApi.COMMENTS_PATH, method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> getComments() {
 
         this.Logger.info("Fetching all comments");
         return new ResponseEntity<>(this.Comments.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = COMMENT_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = ServerApi.COMMENT_PATH, method = RequestMethod.GET)
     public ResponseEntity<Comment> getComment(@PathVariable("id") UUID id) {
 
         this.Logger.info("Get Comment by Id: " + id);
@@ -57,7 +54,7 @@ public class CommentsApiController {
         return new ResponseEntity<>(comment, HttpStatus.OK);
     }
 
-    @RequestMapping(value = COMMENT_PATH, method = RequestMethod.DELETE)
+    @RequestMapping(value = ServerApi.COMMENT_PATH, method = RequestMethod.DELETE)
     public ResponseEntity deleteComment(@PathVariable("id") UUID id) {
 
         if (this.Comments.exists(id)) {
@@ -71,7 +68,7 @@ public class CommentsApiController {
         }
     }
 
-    @RequestMapping(value = COMMENTS_PATH, method = RequestMethod.POST)
+    @RequestMapping(value = ServerApi.COMMENTS_PATH, method = RequestMethod.POST)
     public ResponseEntity<Comment> addComment(@RequestBody Comment comment, @RequestParam(value = "author", required = true) UUID author,@RequestParam(value = "picture", required = true) UUID picture) {
 
         Author a = this.Authors.findOne(author);
@@ -100,7 +97,7 @@ public class CommentsApiController {
         return new ResponseEntity<>(newCom,HttpStatus.OK);
     }
 
-    @RequestMapping(value = COMMENT_PATH, method = RequestMethod.PUT)
+    @RequestMapping(value = ServerApi.COMMENT_PATH, method = RequestMethod.PUT)
     public ResponseEntity<Comment> updateComment(@RequestBody Comment comment, @PathVariable(value = "id") UUID id) {
         if (!this.Comments.exists(id)) {
             this.Logger.warn("Comment for update not found");
