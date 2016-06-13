@@ -12,7 +12,10 @@ import org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoCo
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication(exclude = {
@@ -26,6 +29,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class DemoApplication extends WebMvcConfigurerAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
