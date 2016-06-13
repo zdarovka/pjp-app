@@ -1,5 +1,8 @@
 package cz.tul.api;
 
+import com.sun.jna.platform.mac.MacFileUtils;
+import cz.tul.client.FileManager;
+import cz.tul.client.ImageStatus;
 import cz.tul.client.ServerApi;
 import cz.tul.data.Author;
 import cz.tul.data.Picture;
@@ -7,10 +10,19 @@ import cz.tul.repositories.AuthorRepository;
 import cz.tul.repositories.PictureRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +33,11 @@ import java.util.UUID;
 @RestController
 public class PicturesApiController{
 
+<<<<<<< HEAD
+=======
+    private FileManager imageDataMgr;
+
+>>>>>>> 0aefea0662892bd341c73ec70b6d2f6640547d36
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(PicturesApiController.class);
 
     @Autowired
@@ -141,6 +158,7 @@ public class PicturesApiController{
         }
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = ServerApi.PICTURE_LIKE_PATH, method = RequestMethod.PUT)
     public ResponseEntity<Picture> likePicture(@PathVariable(value = "id") UUID id) {
         if (!this.Pictures.exists(id)) {
@@ -170,6 +188,38 @@ public class PicturesApiController{
 
             this.Pictures.save(pic);
             return new ResponseEntity<>(pic,HttpStatus.OK);
+=======
+    @RequestMapping(value = ServerApi.UPLOAD_PATH, method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ImageStatus uploadImage(@PathVariable("name") String name,
+                            @RequestParam("data") MultipartFile imageData,
+                            HttpServletResponse response) {
+
+        ImageStatus state = new ImageStatus(ImageStatus.ImageState.READY);
+
+        setFileManager();
+
+        try {
+            imageDataMgr.saveImageData(name, imageData.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return state;
+    }
+
+    public void setFileManager() {
+
+        try {
+
+            imageDataMgr = FileManager.get();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+>>>>>>> 0aefea0662892bd341c73ec70b6d2f6640547d36
         }
     }
 }
