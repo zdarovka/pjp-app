@@ -4,15 +4,10 @@ package cz.tul.api;
  * Created by zdars on 30.05.2016.
  */
 
-
-import cz.tul.DemoApplication;
-import cz.tul.client.ServerApi;
 import cz.tul.data.Author;
-import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,19 +21,23 @@ import java.util.UUID;
 @RestController
 public class AuthorsApiController {
 
+
+    public static final String AUTHORS_PATH = "/api/authors";
+    public static final String AUTHOR_PATH = AUTHORS_PATH + "/{id}";
+
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(AuthorsApiController.class);
 
     @Autowired
     private AuthorRepository Authors;
 
-    @RequestMapping(value = ServerApi.AUTHORS_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = AUTHORS_PATH, method = RequestMethod.GET)
     public ResponseEntity<List<Author>> getAuthors() {
 
         this.Logger.info("Fetching all authors");
         return new ResponseEntity<>(this.Authors.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = ServerApi.AUTHOR_PATH, method = RequestMethod.GET)
+    @RequestMapping(value = AUTHOR_PATH, method = RequestMethod.GET)
     public ResponseEntity<Author> getAuthor(@PathVariable("id") UUID id) {
 
         Author author = this.Authors.findOne(id);
@@ -51,7 +50,7 @@ public class AuthorsApiController {
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
-    @RequestMapping(value = ServerApi.AUTHOR_PATH, method = RequestMethod.DELETE)
+    @RequestMapping(value = AUTHOR_PATH, method = RequestMethod.DELETE)
     public ResponseEntity deleteAuthor(@PathVariable("id") UUID id) {
 
         if (this.Authors.exists(id)) {
@@ -65,7 +64,7 @@ public class AuthorsApiController {
         }
     }
 
-    @RequestMapping(value = ServerApi.AUTHORS_PATH, method = RequestMethod.POST)
+    @RequestMapping(value = AUTHORS_PATH, method = RequestMethod.POST)
     public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
 
         Author newAuthor = new Author(author.getName());
@@ -76,7 +75,7 @@ public class AuthorsApiController {
         return new ResponseEntity<>(newAuthor,HttpStatus.OK);
     }
 
-    @RequestMapping(value = ServerApi.AUTHOR_PATH, method = RequestMethod.PUT)
+    @RequestMapping(value = AUTHOR_PATH, method = RequestMethod.PUT)
     public ResponseEntity<Author> updateAuthor(@RequestBody Author author, @PathVariable(value = "id") UUID id) {
 
         if (!this.Authors.exists(id)) {
