@@ -10,8 +10,11 @@ public class ServerApi {
 
 
     public static final String COMMENTS_PATH = "/api/comments";
+
     public static final String COMMENT_PATH = COMMENTS_PATH + "/{id}";
 
+    public static final String COMMENT_LIKE_PATH = COMMENT_PATH + "/like";
+    public static final String COMMENT_DISLIKE_PATH = COMMENT_PATH + "/dislike";
 
 
     public static final String PICTURES_PATH = "/api/pictures";
