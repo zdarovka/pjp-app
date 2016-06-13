@@ -6,8 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 /**
@@ -25,6 +24,7 @@ public class Tag {
     private UUID id;
 
     @Column(name="name")
+    @Size(max=16)
     private String name;
 
     public String getName() {
