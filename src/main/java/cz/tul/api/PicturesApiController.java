@@ -186,8 +186,7 @@ public class PicturesApiController{
     public ResponseEntity<Picture> uploadImage(
             @PathVariable("name") String name,
             @PathVariable("author") UUID author,
-            @RequestParam("data") MultipartFile imageData,
-            HttpServletResponse response)
+            @RequestParam("data") MultipartFile imageData)
     {
         if(!this.Authors.exists(author))
         {
