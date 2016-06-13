@@ -1,16 +1,13 @@
 package cz.tul.api;
 
-import cz.tul.client.FileManager;
-import cz.tul.client.ImageStatus;
 import cz.tul.client.ServerApi;
+import cz.tul.code.FileManager;
 import cz.tul.data.Author;
 import cz.tul.data.Picture;
 import cz.tul.repositories.AuthorRepository;
 import cz.tul.repositories.PictureRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +26,7 @@ import java.util.UUID;
 public class PicturesApiController{
 
 
-    @Value("${dataimg.path}")
-    private String picsPath;
-
+    @Autowired
     private FileManager imageDataMgr;
 
     private org.slf4j.Logger Logger = LoggerFactory.getLogger(PicturesApiController.class);
@@ -188,22 +183,35 @@ public class PicturesApiController{
     }
 
     @RequestMapping(value = ServerApi.UPLOAD_PATH, method = RequestMethod.POST)
-    public @ResponseBody ImageStatus uploadImage(@PathVariable("name") String name,
-                            @RequestParam("data") MultipartFile imageData,
-                            HttpServletResponse response) {
-
-        ImageStatus state = new ImageStatus(ImageStatus.ImageState.READY);
-
+    public ResponseEntity<Picture> uploadImage(
+            @PathVariable("name") String name,
+            @PathVariable("author") UUID author,
+            @RequestParam("data") MultipartFile imageData,
+            HttpServletResponse response)
+    {
+        if(!this.Authors.exists(author))
+        {
+            this.Logger.warn("Author not found");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         try {
-            this.imageDataMgr = new FileManager(this.picsPath);
-            imageDataMgr.saveImageData(name, imageData.getInputStream());
 
-            
+            String path = imageDataMgr.saveImageData(name, imageData.getInputStream());
+
+            Author a = this.Authors.findOne(author);
+            path = "file:///" + path.replace("\\", "/");
+            Picture p = new Picture(UUID.randomUUID(), name,  path, new Date());
+            p.setAuthor(a);
+
+            this.Pictures.save(p);
+            this.Logger.info("Picture uploaded: " + p.getId());
+            return new ResponseEntity<>(p, HttpStatus.OK);
+
         } catch (IOException e) {
             this.Logger.error(e.getMessage());
         }
 
-        return state;
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
