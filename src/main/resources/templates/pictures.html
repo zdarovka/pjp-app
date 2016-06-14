@@ -43,7 +43,7 @@
                         <p class="lead">
                             <span th:text="${picture.author.name}"></span> |
                             <span th:text="${#dates.format(picture.dateCreated, 'dd.MM.YYYY HH:mm')}"></span> |
-                            <span th:each="tag : ${picture.tags}" th:text="${tag.name}"></span>
+                            <span th:each="tag : ${picture.tags}" th:text="${tag}"></span>
                         </p>
 
                         <table>

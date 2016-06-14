@@ -88,7 +88,7 @@ public class PicturesApiController{
 
         this.Logger.info("Get pictures by tag name: " + name);
 
-        List<Picture> pictures = this.Pictures.findByTagsName(name);
+        List<Picture> pictures = this.Pictures.findByTags(name);
         if(pictures == null)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -11,9 +11,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name="picture")
@@ -55,11 +53,9 @@ public class Picture {
     @DBRef
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "picture", orphanRemoval = true, cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @Column(name = "tags")
-    @DBRef
-    private List<Tag> tags;
+    @ElementCollection(fetch=FetchType.EAGER)
+    @Column(name = "tag", length = 16)
+    private Set<String> tags = new HashSet<>();
 
     public Picture() {
     }
@@ -80,6 +76,17 @@ public class Picture {
         this.dateUpdated = d;
         this.likes = likes;
         this.dislikes = dislikes;
+    }
+
+    public Picture(UUID id,String name, String url, Date d, int likes, int dislikes, Set<String> tags){
+        this.name = name;
+        this.url = url;
+        this.id = id;
+        this.dateCreated = d;
+        this.dateUpdated = d;
+        this.likes = likes;
+        this.dislikes = dislikes;
+        this.tags = tags;
     }
 
     public Picture(Author author) {
@@ -103,15 +110,15 @@ public class Picture {
         this.comments.add(comment);
     }
 
-    public List<Tag> getTags() {
+    public Set<String> getTags() {
         return this.tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<String> tags) {
         this.tags = tags;
     }
 
-    public void addTag(Tag tag) {
+    public void addTag(String tag) {
         this.tags.add(tag);
     }
 
