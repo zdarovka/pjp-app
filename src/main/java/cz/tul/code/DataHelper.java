@@ -14,17 +14,9 @@ public final class DataHelper {
 
     }
 
-    public static int randomNumber(int min, int max) {
-        int range = (max - min) + 1;
-        return (int)(Math.random() * range) + min;
-    }
-
     public static Date randomDate() {
-        //Random date from 2016 to 2017
         Random r =new Random();
-        long unixtime =(long) (1451606400+r.nextDouble()*60*60*24*365*1000);
-        Date utilDate = new Date(unixtime);
-
+        Date utilDate = new Date((long) Math.abs(System.currentTimeMillis() - r.nextDouble()*60*60*24*365*1000));
         return utilDate;
     }
 }
